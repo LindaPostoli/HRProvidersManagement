@@ -1,4 +1,4 @@
-package recruiting;
+package it.synclab.hrpm.model;
 
 public abstract class HRProvider {
 
