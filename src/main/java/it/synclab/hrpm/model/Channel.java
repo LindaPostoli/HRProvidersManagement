@@ -1,5 +1,5 @@
 package it.synclab.hrpm.model;
 
-public abstract class HRProvider {
+public abstract class Channel {
 
 }
