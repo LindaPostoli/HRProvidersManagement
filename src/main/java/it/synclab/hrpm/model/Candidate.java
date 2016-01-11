@@ -2,9 +2,7 @@ package it.synclab.hrpm.model;
 
 import java.util.Calendar;
 
-import javax.swing.border.EmptyBorder;
-
-public class Candidate {
+public class Candidate implements Entity {
 
 	private String taxCode;
 	private String name, surname;
@@ -16,10 +14,10 @@ public class Candidate {
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
 
 	private Rating rating;
-	// TODO: private enum channel
+	private Channel channel;
 
 	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
-			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating) {
+			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, Channel channel) {
 		this.taxCode = taxCode;
 		this.name = name;
 		this.surname = surname;
@@ -32,12 +30,14 @@ public class Candidate {
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
 		this.rating = rating;
+		this.channel=channel;
 	}
 
-	public Candidate(String taxCode) {
+	public Candidate(String taxCode, Channel channel) {
 		this.taxCode = taxCode;
+		this.channel= channel;
 	}
-
+	
 	public String getTaxCode() {
 		return taxCode;
 	}
@@ -69,6 +69,7 @@ public class Candidate {
 	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
+	
 
 	public String getBirthPlace() {
 		return birthPlace;
@@ -133,7 +134,21 @@ public class Candidate {
 	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
+	
+	
+	public Channel getChannel() {
+		return channel;
+	}
 
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+
+	public static String getHeader() {
+		return HEADER;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,6 +156,7 @@ public class Candidate {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
 		result = prime * result + ((birthPlace == null) ? 0 : birthPlace.hashCode());
+		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
@@ -176,6 +192,11 @@ public class Candidate {
 			if (other.birthPlace != null)
 				return false;
 		} else if (!birthPlace.equals(other.birthPlace))
+			return false;
+		if (channel == null) {
+			if (other.channel != null)
+				return false;
+		} else if (!channel.equals(other.channel))
 			return false;
 		if (city == null) {
 			if (other.city != null)
@@ -225,12 +246,13 @@ public class Candidate {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
 				+ ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
 				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating
-				+ "]";
+				+ ", channel=" + channel + "]";
 	}
 
 	public String toCSV() {
