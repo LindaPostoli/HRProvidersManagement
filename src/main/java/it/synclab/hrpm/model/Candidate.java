@@ -2,6 +2,8 @@ package it.synclab.hrpm.model;
 
 import java.util.Calendar;
 
+import javax.swing.border.EmptyBorder;
+
 public class Candidate {
 
 	private String taxCode;
@@ -9,7 +11,7 @@ public class Candidate {
 	private Calendar birthDate;
 	private String birthPlace;
 	private String address, zipCode, city, country;
-	public static final String HEADER = "NAME; SURNAME; TAX_CODE; BIRTH_DATE; BIRTH_PLACE; ADDRESS; ZIP_CODE; CITY; COUNTRY";
+	public static final String HEADER = "NAME; SURNAME; TAX_CODE; BIRTH_DATE; BIRTH_PLACE; ADDRESS; ZIP_CODE; CITY; COUNTRY; PHONE_NUMBER; E-MAIL;";
 
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
 
@@ -233,7 +235,7 @@ public class Candidate {
 
 	public String toCSV() {
 		return name + ";" + surname + ";" + taxCode + ";" + birthDate + ";" + birthPlace + ";" + address + ";" + zipCode
-				+ city + ";" + country + ";";
+				+ city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
 
 }
