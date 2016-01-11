@@ -1,10 +1,12 @@
 package it.synclab.hrpm.core;
 
+import it.synclab.hrpm.model.Entity;
+
 public interface Connection {
-	public void insert(Object obj);
-	
-	public void update(Object obj);
-	
-	public void delete(Object obj);
-	
+	public void insert(Entity obj);
+
+	public void update(Entity obj);
+
+	public void delete(Entity obj);
+
 }

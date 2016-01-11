@@ -2,9 +2,7 @@ package it.synclab.hrpm.model;
 
 import java.util.Calendar;
 
-import javax.swing.border.EmptyBorder;
-
-public class Candidate {
+public class Candidate implements Entity {
 
 	private String taxCode;
 	private String name, surname;
