@@ -2,13 +2,12 @@ package it.synclab.hrpm.model;
 
 public class UnsolicitedApplication implements Channel {
 
-	@Override
-	public String toString() {
+	public String toCSV() {
 		return "Unsolicited Application";
 	}
 
-	public String toCSV() {
-		return "Unsolicited Application";
+	public String getHeader() {
+		return null;
 	}
 
 }

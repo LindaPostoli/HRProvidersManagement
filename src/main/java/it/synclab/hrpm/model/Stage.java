@@ -1,14 +1,19 @@
 package it.synclab.hrpm.model;
 
-import java.sql.Date;
+import java.util.Calendar;
 
 public class Stage implements Channel {
 
 	private String title, tutor;
+<<<<<<< HEAD
 	private Date fromDate, toDate;
 	private static final String HEADER = "TITLE;TUTOR;FROM_DATE;TO_DATE;";
+=======
+	private Calendar fromDate, toDate;
+	private static final String HEADER = " TITLE; TUTOR; FROM_DATE; TO_DATE;";
+>>>>>>> 018ab4d84f0b1200eaecf434c2b5caaab46c652b
 
-	public Stage(String title, String tutor, Date fromDate, Date toDate) {
+	public Stage(String title, String tutor, Calendar fromDate, Calendar toDate) {
 		super();
 		this.title = title;
 		this.tutor = tutor;
@@ -36,23 +41,23 @@ public class Stage implements Channel {
 		this.tutor = tutor;
 	}
 
-	public Date getFromDate() {
+	public Calendar getFromDate() {
 		return fromDate;
 	}
 
-	public void setFromDate(Date fromDate) {
+	public void setFromDate(Calendar fromDate) {
 		this.fromDate = fromDate;
 	}
 
-	public Date getToDate() {
+	public Calendar getToDate() {
 		return toDate;
 	}
 
-	public void setToDate(Date toDate) {
+	public void setToDate(Calendar toDate) {
 		this.toDate = toDate;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 

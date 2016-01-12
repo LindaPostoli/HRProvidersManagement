@@ -85,7 +85,7 @@ public class University implements Channel {
 		this.fieldOfStudy = fieldOfStudy;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 

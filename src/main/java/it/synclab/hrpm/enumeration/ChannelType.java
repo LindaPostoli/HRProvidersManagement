@@ -8,5 +8,5 @@ public enum ChannelType {
 		UNIVERSITY,
 		STAGE,
 		REFERENCE;
-	
+
 }

@@ -144,9 +144,15 @@
 			<timezone>+1</timezone>
 		</developer>
 		<developer>
+<<<<<<< HEAD
 			<id>danymar91</id>
 			<name>Daniele Marancina</name>
 			<email>marancinadg@hotmail.it</email>
+=======
+			<id>MC</id>
+			<name>Marco Cacia</name>
+			<email>marco.cacia@outlook.com</email>
+>>>>>>> 018ab4d84f0b1200eaecf434c2b5caaab46c652b
 			<roles>
 				<role>Stager</role>
 			</roles>

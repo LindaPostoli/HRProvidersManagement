@@ -5,7 +5,7 @@ public class Rating implements Entity {
 	private String professionalImpressions;
 	private String personalityImpressions;
 	private int mark;
-	private static final String HEADER = "PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
+	public static final String HEADER = "PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
 	public String getProfessionalImpressions() {
