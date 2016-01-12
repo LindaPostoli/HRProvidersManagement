@@ -1,5 +1,8 @@
 package it.synclab.hrpm.model;
 
-public abstract class Channel {
-
+public interface Channel {
+	
+	public String toString();
+	public String toCSV();
+	
 }
