@@ -143,5 +143,15 @@
 			<organization>Synclab s.r.l.</organization>
 			<timezone>+1</timezone>
 		</developer>
+		<developer>
+			<id>danymar91</id>
+			<name>Daniele Marancina</name>
+			<email>marancinadg@hotmail.it</email>
+			<roles>
+				<role>Stager</role>
+			</roles>
+			<organization>Synclab s.r.l.</organization>
+			<timezone>+1</timezone>
+		</developer>
 	</developers>
 </project>
