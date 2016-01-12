@@ -76,7 +76,7 @@ public class Company implements Channel {
 		this.eMail = eMail;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 

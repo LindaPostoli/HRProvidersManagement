@@ -52,7 +52,7 @@ public class Stage implements Channel {
 		this.toDate = toDate;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 

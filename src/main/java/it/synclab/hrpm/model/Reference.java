@@ -57,7 +57,7 @@ public class Reference implements Channel {
 		this.opinion = opinion;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 

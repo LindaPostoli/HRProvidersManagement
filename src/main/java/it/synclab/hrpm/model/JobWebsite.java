@@ -21,7 +21,7 @@ public class JobWebsite implements Channel {
 		this.url = url;
 	}
 
-	public static String getHeader() {
+	public String getHeader() {
 		return HEADER;
 	}
 
