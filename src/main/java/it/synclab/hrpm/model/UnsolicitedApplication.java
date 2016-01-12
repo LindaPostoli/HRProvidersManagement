@@ -11,4 +11,7 @@ public class UnsolicitedApplication implements Channel {
 		return "Unsolicited Application";
 	}
 
+	public void setName(String string) {
+	}
+
 }
