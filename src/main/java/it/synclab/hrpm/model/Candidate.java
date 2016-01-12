@@ -36,7 +36,23 @@ public class Candidate implements Entity {
 		this.rating = rating;
 		this.channelType=channelType;
 	}
-
+	
+	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
+			String zipCode, String city, String country, String phoneNumber, String eMail) {
+		this.taxCode = taxCode;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		this.birthPlace = birthPlace;
+		this.address = address;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.eMail = eMail;
+		
+	}
+	
 	public Candidate(String taxCode, ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.channelType= channelType;
