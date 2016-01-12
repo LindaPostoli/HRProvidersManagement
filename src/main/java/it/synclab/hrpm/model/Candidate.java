@@ -2,7 +2,7 @@ package it.synclab.hrpm.model;
 
 import java.util.Calendar;
 
-public class Candidate implements Entity {
+public class Candidate {
 
 	private String taxCode;
 	private String name, surname;
@@ -10,7 +10,6 @@ public class Candidate implements Entity {
 	private String birthPlace;
 	private String address, zipCode, city, country;
 	public static final String HEADER = "NAME; SURNAME; TAX_CODE; BIRTH_DATE; BIRTH_PLACE; ADDRESS; ZIP_CODE; CITY; COUNTRY; PHONE_NUMBER; E-MAIL;";
-
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
 
 	private Rating rating;
