@@ -3,7 +3,7 @@ package it.synclab.hrpm.model;
 public class University implements Channel {
 
 	private String name, address, zipCode, city, country, phoneNumber, eMail, fieldOfStudy;
-	private static final String HEADER = "NAME; ADDRESS; ZIP_CODE; CITY; COUNTRY; PHONE_NUMBER; E-MAIL; FIELD_OF_STUDY;";
+	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;FIELD_OF_STUDY;";
 
 	public University(String name, String address, String zipCode, String city, String country, String phoneNumber,
 			String eMail, String fieldOfStudy) {

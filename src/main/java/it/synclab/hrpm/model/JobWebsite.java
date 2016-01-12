@@ -3,7 +3,7 @@ package it.synclab.hrpm.model;
 public class JobWebsite implements Channel {
 
 	private String name, url;
-	private static final String HEADER = "NAME; URL;";
+	private static final String HEADER = "URL;NAME";
 
 	public String getName() {
 		return name;
@@ -62,7 +62,7 @@ public class JobWebsite implements Channel {
 	}
 
 	public String toCSV() {
-		return name + ";" + url + ";";
+		return url + ";" + name;
 	}
 
 }

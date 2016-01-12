@@ -6,7 +6,7 @@ public class Stage implements Channel {
 
 	private String title, tutor;
 	private Date fromDate, toDate;
-	private static final String HEADER = " TITLE; TUTOR; FROM_DATE; TO_DATE;";
+	private static final String HEADER = "TITLE;TUTOR;FROM_DATE;TO_DATE;";
 
 	public Stage(String title, String tutor, Date fromDate, Date toDate) {
 		super();
