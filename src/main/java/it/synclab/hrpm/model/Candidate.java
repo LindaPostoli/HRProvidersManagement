@@ -1,5 +1,8 @@
 package it.synclab.hrpm.model;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -15,6 +18,7 @@ public class Candidate implements Entity {
 
 	private Rating rating;
 	private Channel channel;
+	private Object brithDate;
 
 	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
 			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, Channel channel) {
@@ -65,11 +69,18 @@ public class Candidate implements Entity {
 	public Calendar getBirthDate() {
 		return birthDate;
 	}
+	
+	
 
 	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
 	
+	public void setBirthDateString(String birthDate) throws ParseException {
+		SimpleDateFormat format=new SimpleDateFormat("dd/mm/yyyy");
+		Calendar date=Calendar.getInstance();
+		date.setTime(format.parse(birthDate));
+	}
 
 	public String getBirthPlace() {
 		return birthPlace;
