@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import it.synclab.hrpm.enumeration.ChannelType;
+
 
 public class Candidate implements Entity {
 
@@ -17,11 +19,10 @@ public class Candidate implements Entity {
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
 
 	private Rating rating;
-	private Channel channel;
-	private Object brithDate;
+	private ChannelType channelType;
 
 	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
-			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, Channel channel) {
+			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.name = name;
 		this.surname = surname;
@@ -34,12 +35,12 @@ public class Candidate implements Entity {
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
 		this.rating = rating;
-		this.channel=channel;
+		this.channelType=channelType;
 	}
 
-	public Candidate(String taxCode, Channel channel) {
+	public Candidate(String taxCode, ChannelType channelType) {
 		this.taxCode = taxCode;
-		this.channel= channel;
+		this.channelType= channelType;
 	}
 	
 	public String getTaxCode() {
@@ -147,12 +148,12 @@ public class Candidate implements Entity {
 	}
 	
 	
-	public Channel getChannel() {
-		return channel;
+	public ChannelType getChannelType() {
+		return channelType;
 	}
 
-	public void setChannel(Channel channel) {
-		this.channel = channel;
+	public void setChannelType(ChannelType channelType) {
+		this.channelType = channelType;
 	}
 
 	public static String getHeader() {
@@ -167,7 +168,7 @@ public class Candidate implements Entity {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
 		result = prime * result + ((birthPlace == null) ? 0 : birthPlace.hashCode());
-		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
+		result = prime * result + ((channelType == null) ? 0 : channelType.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
@@ -204,10 +205,10 @@ public class Candidate implements Entity {
 				return false;
 		} else if (!birthPlace.equals(other.birthPlace))
 			return false;
-		if (channel == null) {
-			if (other.channel != null)
+		if (channelType == null) {
+			if (other.channelType != null)
 				return false;
-		} else if (!channel.equals(other.channel))
+		} else if (!channelType.equals(other.channelType))
 			return false;
 		if (city == null) {
 			if (other.city != null)
@@ -263,7 +264,7 @@ public class Candidate implements Entity {
 		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
 				+ ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
 				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating
-				+ ", channel=" + channel + "]";
+				+ ", channel=" + channelType + "]";
 	}
 
 	public String toCSV() {
