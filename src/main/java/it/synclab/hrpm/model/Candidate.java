@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 import it.synclab.hrpm.enumeration.ChannelType;
 
-
 public class Candidate implements Entity {
 
 	private String taxCode;
@@ -20,8 +19,13 @@ public class Candidate implements Entity {
 	private Rating rating;
 	private ChannelType channelType;
 
+	public Candidate(String taxCode) {
+		this.taxCode = taxCode;
+	}
+
 	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
-			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, ChannelType channelType) {
+			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating,
+			ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.name = name;
 		this.surname = surname;
@@ -34,9 +38,9 @@ public class Candidate implements Entity {
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
 		this.rating = rating;
-		this.channelType=channelType;
+		this.channelType = channelType;
 	}
-	
+
 	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
 			String zipCode, String city, String country, String phoneNumber, String eMail) {
 		this.taxCode = taxCode;
@@ -50,14 +54,14 @@ public class Candidate implements Entity {
 		this.country = country;
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
-		
+
 	}
-	
+
 	public Candidate(String taxCode, ChannelType channelType) {
 		this.taxCode = taxCode;
-		this.channelType= channelType;
+		this.channelType = channelType;
 	}
-	
+
 	public String getTaxCode() {
 		return taxCode;
 	}
@@ -85,17 +89,22 @@ public class Candidate implements Entity {
 	public Calendar getBirthDate() {
 		return birthDate;
 	}
-	
-	
 
 	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
-	
-	public void setBirthDateString(String birthDate) throws ParseException {
-		SimpleDateFormat format=new SimpleDateFormat("dd/mm/yyyy");
-		Calendar date=Calendar.getInstance();
+
+	/**
+	 * 
+	 * @param birthDate
+	 *            as dd/mm/yyyy format
+	 * @throws ParseException
+	 */
+	public void setBirthDate(String birthDate) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+		Calendar date = Calendar.getInstance();
 		date.setTime(format.parse(birthDate));
+		this.birthDate = date;
 	}
 
 	public String getBirthPlace() {
@@ -161,8 +170,7 @@ public class Candidate implements Entity {
 	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
-	
-	
+
 	public ChannelType getChannelType() {
 		return channelType;
 	}
@@ -174,8 +182,7 @@ public class Candidate implements Entity {
 	public static String getHeader() {
 		return HEADER;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -272,7 +279,6 @@ public class Candidate implements Entity {
 			return false;
 		return true;
 	}
-
 
 	@Override
 	public String toString() {
