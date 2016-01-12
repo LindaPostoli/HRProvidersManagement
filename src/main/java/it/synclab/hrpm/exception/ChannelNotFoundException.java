@@ -2,7 +2,7 @@ package it.synclab.hrpm.exception;
 
 public class ChannelNotFoundException extends RuntimeException {
 
-	private static final long serialVersionUID = 2936558835558769229L;
+	private static final long serialVersionUID = -3670564933718444909L;
 
 	public ChannelNotFoundException() {
 		super();
