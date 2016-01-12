@@ -85,6 +85,10 @@ public class University implements Channel {
 		this.fieldOfStudy = fieldOfStudy;
 	}
 
+	public static String getHeader() {
+		return HEADER;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
