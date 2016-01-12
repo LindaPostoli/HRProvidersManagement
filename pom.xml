@@ -133,5 +133,15 @@
 			<organization>Synclab s.r.l.</organization>
 			<timezone>+1</timezone>
 		</developer>
+		<developer>
+			<id>linda</id>
+			<name>Linda Postoli</name>
+			<email>linda.postoli@gmail.com</email>
+			<roles>
+				<role>Stager</role>
+			</roles>
+			<organization>Synclab s.r.l.</organization>
+			<timezone>+1</timezone>
+		</developer>
 	</developers>
 </project>

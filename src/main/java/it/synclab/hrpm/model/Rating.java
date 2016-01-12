@@ -1,6 +1,6 @@
 package it.synclab.hrpm.model;
 
-public class Rating {
+public class Rating implements Entity {
 
 	private String professionalImpressions;
 	private String personalityImpressions;
