@@ -13,7 +13,7 @@ public class Candidate implements Entity {
 	private Calendar birthDate;
 	private String birthPlace;
 	private String address, zipCode, city, country;
-	public static final String HEADER = "NAME; SURNAME; TAX_CODE; BIRTH_DATE; BIRTH_PLACE; ADDRESS; ZIP_CODE; CITY; COUNTRY; PHONE_NUMBER; E-MAIL;";
+	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;";
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
 
 	private Rating rating;
@@ -267,7 +267,7 @@ public class Candidate implements Entity {
 	}
 
 	public String toCSV() {
-		return name + ";" + surname + ";" + taxCode + ";" + birthDate + ";" + birthPlace + ";" + address + ";" + zipCode
+		return taxCode + ";" + name + ";" + surname + ";" + birthDate + ";" + birthPlace + ";" + address + ";" + zipCode
 				+ city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
 
