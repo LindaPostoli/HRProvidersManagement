@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,45 +12,29 @@ public class ReadCsv {
 
 	private static final String SEPARATOR = ";";
 
-	public Calendar setBirthDateString(String birthDate) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
-		Calendar date = Calendar.getInstance();
-		date.setTime(format.parse(birthDate));
-		return date;
-	}
-
-	public String ConvertCalendarToString(Calendar BirthDate) {
-		Calendar birthDate = Calendar.getInstance();
-		String birthDateToString = birthDate.toString();
-
-		return birthDateToString;
-	}
-
 	public Candidate createObj(String[] data) throws ParseException {
-		String taxCode = data[0];
-		String name = data[1];
-		String surname = data[2];
-		String birthDateString = data[3];
-		String birthPlace = data[4];
-		String address = data[5];
-		String zipCode = data[6];
-		String city = data[7];
-		String country = data[8];
-		String phoneNumber = data[9];
-		String eMail = data[10];
-		Calendar birthDate= Calendar.getInstance();
-		birthDate=setBirthDateString(birthDateString);
 
-		return new Candidate(taxCode, name, surname, birthDate, birthPlace, address, zipCode, city, country, phoneNumber, eMail);
+		Candidate candidate = new Candidate(data[0]);
+		candidate.setName(data[1]);
+		candidate.setSurname(data[2]);
+		candidate.setBirthDate(data[3]);
+		candidate.setAddress(data[4]);
+		candidate.setZipCode(data[6]);
+		candidate.setCity(data[7]);
+		candidate.setCountry(data[8]);
+		candidate.setPhoneNumber(data[9]);
+		candidate.seteMail(data[10]);
+
+		return candidate;
 	}
 
-	public void read() {
+	public Map<String, Candidate> read() {
 
 		String csvFile = "Candidate.csv";
 		BufferedReader file = null;
 
 		String line = "";
-		Map<String, Object> candidateMap = new HashMap<String, Object>();
+		Map<String, Candidate> candidateMap = new HashMap<String, Candidate>();
 
 		try {
 
@@ -82,7 +64,7 @@ public class ReadCsv {
 				}
 			}
 		}
-
+		return candidateMap;
 	}
 
 }
