@@ -1,17 +1,22 @@
 package it.synclab.hrpm.core;
 
+import it.synclab.hrpm.bootstrap.FileManager;
+import it.synclab.hrpm.model.Entity;
+
 public class FileConnection implements Connection {
-	
-	public void insert(Object obj) {
-		System.out.println("FileConnection: insert " + obj);
+
+	public void insert(Entity obj) {
+
+		FileManager fm = new FileManager();
+		fm.insert(obj);
 	}
-	
-	public void update(Object obj) {
-		System.out.println("FileConnection: update " + obj);
+
+	public void update(Entity obj) {
+		FileManager fm = new FileManager();
 	}
-	
-	public void delete(Object obj) {
-		System.out.println("FileConnection: delete " + obj);
+
+	public void delete(Entity obj) {
+		FileManager fm = new FileManager();
 	}
-	
+
 }

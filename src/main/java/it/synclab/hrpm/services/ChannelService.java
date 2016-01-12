@@ -1,9 +1,8 @@
 package it.synclab.hrpm.services;
 
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
-import it.synclab.hrpm.model.Channel;
 
-public class ChannelService extends PersistentService<Channel> {
+public class ChannelService extends PersistentService {
 	
 	public ChannelService(ConnectionCriteria criteria) {
 		super(criteria);

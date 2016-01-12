@@ -8,6 +8,7 @@ public class Rating {
 	private static final String HEADER = "PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
+
 	public String getProfessionalImpressions() {
 		return professionalImpressions;
 	}
@@ -32,9 +33,11 @@ public class Rating {
 		this.mark = mark;
 	}
 
+
 	public static String getHeader() {
 		return HEADER;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -75,5 +78,7 @@ public class Rating {
 		return "Rating [professionalImpressions=" + professionalImpressions + ", personalityImpressions="
 				+ personalityImpressions + ", mark=" + mark + "]";
 	}
+
+
 
 }

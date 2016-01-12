@@ -2,7 +2,8 @@ package it.synclab.hrpm.model;
 
 import java.util.Calendar;
 
-public class Candidate {
+
+public class Candidate implements Entity {
 
 	private String taxCode;
 	private String name, surname;
