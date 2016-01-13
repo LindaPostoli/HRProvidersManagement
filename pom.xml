@@ -22,7 +22,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<scm>
 		<url>https://github.com/LindaPostoli/HRProvidersManagement</url>
 		<connection>scm:git:git://github.com/LindaPostoli/HRProvidersManagement.git</connection>
@@ -144,15 +144,19 @@
 			<timezone>+1</timezone>
 		</developer>
 		<developer>
-<<<<<<< HEAD
-			<id>danymar91</id>
+			<id>DM</id>
 			<name>Daniele Marancina</name>
 			<email>marancinadg@hotmail.it</email>
-=======
+			<roles>
+				<role>Stager</role>
+			</roles>
+			<organization>Synclab s.r.l.</organization>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
 			<id>MC</id>
 			<name>Marco Cacia</name>
 			<email>marco.cacia@outlook.com</email>
->>>>>>> 018ab4d84f0b1200eaecf434c2b5caaab46c652b
 			<roles>
 				<role>Stager</role>
 			</roles>
