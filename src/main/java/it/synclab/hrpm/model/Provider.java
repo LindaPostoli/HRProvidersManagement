@@ -1,11 +1,11 @@
 package it.synclab.hrpm.model;
 
-public class Company implements Channel {
+public class Provider implements Channel {//TODO change from Company to Provider
 
 	private String name, address, zipCode, city, country, phoneNumber, eMail;
 	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;E-MAIL;";
 
-	public Company(String name, String address, String zipCode, String city, String country, String phoneNumber,
+	public Provider(String name, String address, String zipCode, String city, String country, String phoneNumber,
 			String eMail) {
 		this.name = name;
 		this.address = address;
@@ -16,7 +16,7 @@ public class Company implements Channel {
 		this.eMail = eMail;
 	}
 
-	public Company() {
+	public Provider() {
 		super();
 	}
 
@@ -102,7 +102,7 @@ public class Company implements Channel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Company other = (Company) obj;
+		Provider other = (Provider) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -143,7 +143,7 @@ public class Company implements Channel {
 
 	@Override
 	public String toString() {
-		return "Company [name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
+		return "Provider [name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
 				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + "]";
 	}
 

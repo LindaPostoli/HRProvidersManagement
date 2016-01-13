@@ -2,7 +2,7 @@ package it.synclab.hrpm.enumeration;
 
 public enum ChannelType {
 	
-		COMPANY,
+		PROVIDER,
 		UNSOLICITED_APPLICATION,
 		JOB_WEBSITE,
 		UNIVERSITY,

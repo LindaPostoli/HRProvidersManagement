@@ -41,7 +41,7 @@ public class FileManager {
 
 		for (ChannelType channelType : ChannelType.values()) {
 			Channel channel = ChannelFactory.getInstance(channelType);
-			newFile(channel.getClass().getSimpleName() + ".csv", channel.getHeader());
+			newFile(FileNameFactory.getFileName(channel.getClass()), channel.getHeader());
 		}
 
 		newFile(FileNameFactory.getFileName(Rating.class), Rating.HEADER);
