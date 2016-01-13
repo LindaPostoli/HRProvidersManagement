@@ -2,7 +2,7 @@ package it.synclab.hrpm.model;
 
 public class JobWebsite implements Channel {
 
-	private String name, url;
+	private String url, name;
 	private static final String HEADER = "URL;NAME";
 
 	public String getName() {
