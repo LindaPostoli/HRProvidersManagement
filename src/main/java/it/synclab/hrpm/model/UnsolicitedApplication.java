@@ -10,4 +10,8 @@ public class UnsolicitedApplication implements Channel {
 		return null;
 	}
 
+	public String getKey() {
+		return null;
+	}
+
 }
