@@ -10,7 +10,6 @@ public class Rating implements Entity {
 	public static final String HEADER = "ID;PROFESSIONAL_IMPRESSIONS;PERSONALITY_IMPRESSIONS;MARK";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
-<<<<<<< HEAD
 	public int getId() {
 		return id;
 	}
@@ -30,23 +29,9 @@ public class Rating implements Entity {
 	public int getPersonality() {
 		return personality;
 	}
+	//
 
 	public void setPersonality(int personality) {
-=======
-	public int getProfessionalImpressions() {
-		return professional;
-	}
-
-	public void setProfessionalImpressions(int professional) {
-		this.professional = professional;
-	}
-
-	public int getPersonalityImpressions() {
-		return personality;
-	}
-
-	public void setPersonalityImpressions(int personality) {
->>>>>>> 66746a5a7678a237f8ab4d10b444dfcd90fdccf1
 		this.personality = personality;
 	}
 
@@ -62,17 +47,6 @@ public class Rating implements Entity {
 		return HEADER;
 	}
 
-<<<<<<< HEAD
-=======
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
->>>>>>> 66746a5a7678a237f8ab4d10b444dfcd90fdccf1
 	@Override
 	public String toString() {
 		return "Rating [id=" + id + ", professional=" + professional + ", personality=" + personality + ", mark=" + mark
