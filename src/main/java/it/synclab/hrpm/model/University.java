@@ -168,4 +168,8 @@ public class University implements Channel {
 				+ fieldOfStudy + ";";
 	}
 
+	public String getKey() {
+		return name;
+	}
+
 }

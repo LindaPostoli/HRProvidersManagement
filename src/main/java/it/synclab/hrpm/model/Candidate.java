@@ -293,4 +293,7 @@ public class Candidate implements Entity {
 				+ city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
 
+	public String getKey() {
+		return taxCode;
+	}
 }

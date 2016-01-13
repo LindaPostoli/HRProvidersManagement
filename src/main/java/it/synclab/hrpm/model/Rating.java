@@ -2,10 +2,12 @@ package it.synclab.hrpm.model;
 
 public class Rating implements Entity {
 
+	private String id;
 	private String professionalImpressions;
 	private String personalityImpressions;
 	private int mark;
-	public static final String HEADER = "PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
+
+	public static final String HEADER = "ID; PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
 	public String getProfessionalImpressions() {
@@ -36,10 +38,25 @@ public class Rating implements Entity {
 		return HEADER;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Rating [id=" + id + ", professionalImpressions=" + professionalImpressions + ", personalityImpressions="
+				+ personalityImpressions + ", mark=" + mark + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + mark;
 		result = prime * result + ((personalityImpressions == null) ? 0 : personalityImpressions.hashCode());
 		result = prime * result + ((professionalImpressions == null) ? 0 : professionalImpressions.hashCode());
@@ -55,6 +72,11 @@ public class Rating implements Entity {
 		if (getClass() != obj.getClass())
 			return false;
 		Rating other = (Rating) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (mark != other.mark)
 			return false;
 		if (personalityImpressions == null) {
@@ -70,14 +92,13 @@ public class Rating implements Entity {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Rating [professionalImpressions=" + professionalImpressions + ", personalityImpressions="
-				+ personalityImpressions + ", mark=" + mark + "]";
-	}
-
 	public String toCSV() {
 		return professionalImpressions + ";" + personalityImpressions + ";" + mark + ";";
+	}
+
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 
 }
