@@ -1,8 +1,5 @@
 package it.synclab.hrpm.regex;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 public class RegExpUtil {
 
 	private static final String nameRegex = "[A-Z]+[a-z]*";
