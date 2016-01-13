@@ -19,12 +19,11 @@ public class Candidate implements Entity {
 	private Rating rating;
 	private ChannelType channelType;
 	
-<<<<<<< HEAD
+
 	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;";
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/LindaPostoli/HRProvidersManagement.git
+
 	public Candidate(String taxCode) {
 		this.taxCode = taxCode;
 	}
