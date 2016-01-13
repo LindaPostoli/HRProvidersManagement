@@ -59,31 +59,34 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
-
-	public static void delete(Entity obj) throws IOException {
-
-		String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-		FileWriter writer = new FileWriter(fileName);
-		String line = "";
-		String key = ((Candidate) obj).getKey();
-		if (obj instanceof Candidate) {
-			while ((line = br.readLine()) != null) {
-				if ((line.split(";")[0]).equals(key))
-					// entity.equals(obj)
-					writer.write("");
-
-			}
-
-		}
-	}
-
-	public static void update(Entity obj) throws IOException {
-
-		String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-		FileWriter writer = new FileWriter(fileName);
-
-	}
-
 }
+
+/*
+ * TO CHANGE
+ * 
+ * public static void delete(Entity obj) throws IOException {
+ * 
+ * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
+ * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
+ * FileWriter writer = new FileWriter(fileName); String line = ""; String key =
+ * ((Candidate) obj).getKey(); if (obj instanceof Candidate) { while ((line =
+ * br.readLine()) != null) { if ((line.split(";")[0]).equals(key)) //
+ * entity.equals(obj) writer.write("");
+ * 
+ * }
+ * 
+ * } }
+ * 
+ * 
+ * 
+ * 
+ * public static void update(Entity obj) throws IOException {
+ * 
+ * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
+ * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
+ * FileWriter writer = new FileWriter(fileName);
+ * 
+ * }
+ * 
+ * }
+ */
