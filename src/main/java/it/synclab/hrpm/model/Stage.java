@@ -5,13 +5,8 @@ import java.util.Calendar;
 public class Stage implements Channel {
 
 	private String title, tutor;
-<<<<<<< HEAD
-	private Date fromDate, toDate;
-	private static final String HEADER = "TITLE;TUTOR;FROM_DATE;TO_DATE;";
-=======
 	private Calendar fromDate, toDate;
 	private static final String HEADER = " TITLE; TUTOR; FROM_DATE; TO_DATE;";
->>>>>>> 018ab4d84f0b1200eaecf434c2b5caaab46c652b
 
 	public Stage(String title, String tutor, Calendar fromDate, Calendar toDate) {
 		super();
@@ -112,7 +107,5 @@ public class Stage implements Channel {
 	public String toCSV() {
 		return title + ";" + tutor + ";" + fromDate + ";" + toDate + ";";
 	}
-
-		
 
 }
