@@ -13,12 +13,14 @@ public class Candidate implements Entity {
 	private Calendar birthDate;
 	private String birthPlace;
 	private String address, zipCode, city, country;
-	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;";
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
-
+	
 	private Rating rating;
 	private ChannelType channelType;
-
+	
+	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;";
+	
+	
 	public Candidate(String taxCode) {
 		this.taxCode = taxCode;
 	}
