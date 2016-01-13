@@ -108,6 +108,4 @@ public class Stage implements Channel {
 		return title + ";" + tutor + ";" + fromDate + ";" + toDate + ";";
 	}
 
-		
-
 }

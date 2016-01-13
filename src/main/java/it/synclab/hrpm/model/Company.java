@@ -3,7 +3,7 @@ package it.synclab.hrpm.model;
 public class Company implements Channel {
 
 	private String name, address, zipCode, city, country, phoneNumber, eMail;
-	private static final String HEADER = "NAME; ADDRESS; ZIP_CODE; CITY; COUNTRY; PHONE_NUMBER; E-MAIL;";
+	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;E-MAIL;";
 
 	public Company(String name, String address, String zipCode, String city, String country, String phoneNumber,
 			String eMail) {

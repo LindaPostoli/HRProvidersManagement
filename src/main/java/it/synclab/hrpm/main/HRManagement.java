@@ -32,9 +32,11 @@ public class HRManagement {
 		
 		synclab.setName("SyncLab");
 		Candidate candidate = new Candidate("hgjfaljv", ChannelType.COMPANY);
+
 		
 		
-		candidate.setBirthDateString("03/05/1987");
+		candidate.setBirthDate("03/05/1987");
+
 		cs.insert(candidate);
 		ChannelService chs = new ChannelService(criteria);
 		chs.insert(synclab);

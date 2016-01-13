@@ -22,7 +22,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<scm>
 		<url>https://github.com/LindaPostoli/HRProvidersManagement</url>
 		<connection>scm:git:git://github.com/LindaPostoli/HRProvidersManagement.git</connection>
@@ -137,6 +137,16 @@
 			<id>linda</id>
 			<name>Linda Postoli</name>
 			<email>linda.postoli@gmail.com</email>
+			<roles>
+				<role>Stager</role>
+			</roles>
+			<organization>Synclab s.r.l.</organization>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>DM</id>
+			<name>Daniele Marancina</name>
+			<email>marancinadg@hotmail.it</email>
 			<roles>
 				<role>Stager</role>
 			</roles>
