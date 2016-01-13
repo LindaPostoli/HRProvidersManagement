@@ -3,6 +3,8 @@ package it.synclab.hrpm.main;
 import java.text.ParseException;
 
 import it.synclab.hrpm.bootstrap.FileManager;
+import it.synclab.hrpm.connectionPool.ConnectionPool;
+import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ChannelFactory;
@@ -13,6 +15,17 @@ import it.synclab.hrpm.services.ChannelService;
 
 public class HRManagement {
 	public static void main(String[] args) throws Exception {
+		
+		ConnectionPool connectionPool = new ConnectionPool();
+		Connection conn1 = connectionPool.getConnection();
+		connectionPool.releaseConnection(conn1);
+		Connection conn2 = connectionPool.getConnection();
+		Connection conn3 = connectionPool.getConnection();
+		Connection conn4 = connectionPool.getConnection();
+		Connection conn5 = connectionPool.getConnection();
+		
+		System.out.println(connectionPool.getConnectionNumberAvailable());
+		
 		bootstrap();
 	}
 
@@ -33,6 +46,8 @@ public class HRManagement {
 		cs.insert(candidate);
 		ChannelService chs = new ChannelService(criteria);
 		chs.insert(synclab);
+		
+		
 			
 	}
 
