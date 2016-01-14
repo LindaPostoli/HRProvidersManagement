@@ -24,12 +24,13 @@ public class CandidateParser extends ParserManager<Candidate> {
 			System.out.println("BirthDate malformat: " + data[3]);
 			e.printStackTrace();
 		}
-		candidate.setAddress(data[4] == null ? "" : data[4]);
-		candidate.setZipCode(data[6] == null ? "" : data[5]);
-		candidate.setCity(data[7] == null ? "" : data[6]);
-		candidate.setCountry(data[8] == null ? "" : data[7]);
-		candidate.setPhoneNumber(data[9] == null ? "" : data[8]);
-		candidate.seteMail(data[10] == null ? "" : data[9]);
+		candidate.setBirthPlace(data[4] == null ? "" : data[4]);
+		candidate.setAddress(data[5] == null ? "" : data[5]);
+		candidate.setZipCode(data[6] == null ? "" : data[6]);
+		candidate.setCity(data[7] == null ? "" : data[7]);
+		candidate.setCountry(data[8] == null ? "" : data[8]);
+		candidate.setPhoneNumber(data[9] == null ? "" : data[9]);
+		candidate.seteMail(data[10] == null ? "" : data[10]);
 		return candidate;
 	}
 	
