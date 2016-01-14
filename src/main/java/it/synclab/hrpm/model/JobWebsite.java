@@ -9,6 +9,10 @@ public class JobWebsite implements Channel {
 		this.url = url;
 	}
 	
+	public JobWebsite() {
+		super();
+	}
+
 	public String getName() {
 		return name;
 	}
