@@ -1,6 +1,9 @@
 package it.synclab.hrpm.model;
 
+import java.text.ParseException;
 import java.util.Calendar;
+
+import it.synclab.hrpm.util.CalendarUtil;
 
 public class Stage implements Channel {
 
@@ -9,14 +12,19 @@ public class Stage implements Channel {
 	private Calendar fromDate, toDate;
 	private static final String HEADER = "ID;TITLE;TUTOR;FROM_DATE;TO_DATE";
 
-	public Stage(String title, String tutor, Calendar fromDate, Calendar toDate) {
+	public Stage(int id, String title, String tutor, Calendar fromDate, Calendar toDate) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.tutor = tutor;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 	}
-
+	
+	public Stage(int id) {
+		this.id = id;
+	}
+	
 	public Stage() {
 		super();
 	}
@@ -52,7 +60,17 @@ public class Stage implements Channel {
 	public void setFromDate(Calendar fromDate) {
 		this.fromDate = fromDate;
 	}
-
+	
+	/**
+	 * 
+	 * @param fromDate
+	 *            as dd/mm/yyyy format
+	 * @throws ParseException
+	 */
+	public void setFromDate(String toDate) throws ParseException {
+		this.toDate = CalendarUtil.toCalendar(toDate);
+	}
+	
 	public Calendar getToDate() {
 		return toDate;
 	}
@@ -60,7 +78,17 @@ public class Stage implements Channel {
 	public void setToDate(Calendar toDate) {
 		this.toDate = toDate;
 	}
-
+	
+	/**
+	 * 
+	 * @param toDate
+	 *            as dd/mm/yyyy format
+	 * @throws ParseException
+	 */
+	public void setToDate(String toDate) throws ParseException {
+		this.toDate = CalendarUtil.toCalendar(toDate);
+	}
+	
 	public String getHeader() {
 		return HEADER;
 	}
@@ -76,7 +104,7 @@ public class Stage implements Channel {
 		result = prime * result + ((tutor == null) ? 0 : tutor.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
