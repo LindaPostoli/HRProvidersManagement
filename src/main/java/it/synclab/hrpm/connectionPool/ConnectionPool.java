@@ -6,7 +6,7 @@ import java.util.List;
 import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.core.DBConnection;
 import it.synclab.hrpm.exception.ConnectionNotFoundException;
-import it.synclab.hrpm.exception.ConnectionPoolAlreadyInstantiated;
+import it.synclab.hrpm.exception.ConnectionPoolAlreadyInstantiatedException;
 import it.synclab.hrpm.exception.FullConnectionPoolException;
 
 public class ConnectionPool {
@@ -26,9 +26,9 @@ public class ConnectionPool {
 
 	}
 
-	public static ConnectionPool getInstance() throws ConnectionPoolAlreadyInstantiated {
+	public static ConnectionPool getInstance() throws ConnectionPoolAlreadyInstantiatedException {
 		if (connectionPool != null)
-			throw new ConnectionPoolAlreadyInstantiated(
+			throw new ConnectionPoolAlreadyInstantiatedException(
 					"An instance of ConnectionPool already exists, impossible creating another one");
 
 		connectionPool = new ConnectionPool();
