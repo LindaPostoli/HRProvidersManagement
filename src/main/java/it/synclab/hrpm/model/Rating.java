@@ -45,7 +45,7 @@ public class Rating implements Entity {
 	
 	/**
 	 * 
-	 * @param id
+	 * @param Professional
 	 *            as Integer format
 	 *            
 	 */
@@ -63,7 +63,7 @@ public class Rating implements Entity {
 	
 	/**
 	 * 
-	 * @param id
+	 * @param personality
 	 *            as Integer format
 	 *            
 	 */
@@ -81,7 +81,7 @@ public class Rating implements Entity {
 	
 	/**
 	 * 
-	 * @param id
+	 * @param mark
 	 *            as Integer format
 	 *            
 	 */
