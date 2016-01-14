@@ -2,15 +2,17 @@ package it.synclab.hrpm.model;
 
 public class Reference implements Channel {
 
-	private String name, surname, referenceCompany, phoneNumber, opinion;
-	private static final String HEADER = "SURNAME;NAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION";
+	private String name, surname, referenceCompany, phoneNumber, opinion, eMail;
+	private static final String HEADER = "SURNAME;NAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION;E_MAIL;";
 
-	public Reference(String name, String surname, String referenceCompany, String phoneNumber, String opinion) {
+	public Reference(String name, String surname, String referenceCompany, String phoneNumber, String opinion,
+			String eMail) {
 		this.name = name;
 		this.surname = surname;
 		this.referenceCompany = referenceCompany;
 		this.phoneNumber = phoneNumber;
 		this.opinion = opinion;
+		this.eMail = eMail;
 	}
 
 	public Reference() {
@@ -57,6 +59,14 @@ public class Reference implements Channel {
 		this.opinion = opinion;
 	}
 
+	public String getEMail() {
+		return eMail;
+	}
+
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
+	}
+
 	public String getHeader() {
 		return HEADER;
 	}
@@ -65,6 +75,7 @@ public class Reference implements Channel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((opinion == null) ? 0 : opinion.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
@@ -82,6 +93,11 @@ public class Reference implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		Reference other = (Reference) obj;
+		if (eMail == null) {
+			if (other.eMail != null)
+				return false;
+		} else if (!eMail.equals(other.eMail))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -113,15 +129,15 @@ public class Reference implements Channel {
 	@Override
 	public String toString() {
 		return "Reference [name=" + name + ", surname=" + surname + ", referenceCompany=" + referenceCompany
-				+ ", phoneNumber=" + phoneNumber + ", opinion=" + opinion + "]";
+				+ ", phoneNumber=" + phoneNumber + ", opinion=" + opinion + ", eMail=" + eMail + "]";
 	}
 
 	public String toCSV() {
-		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";";
+		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";" + eMail + ";";
 	}
 
 	public String getKey() {
-		return surname;
+		return eMail;
 	}
 
 }
