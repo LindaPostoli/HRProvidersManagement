@@ -10,8 +10,23 @@ public class Rating implements Entity {
 	public static final String HEADER = "ID;PROFESSIONAL_IMPRESSIONS;PERSONALITY_IMPRESSIONS;MARK";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
+	public Rating(int id, int professional, int personality, int mark) {
+		this.id = id;
+		this.professional = professional;
+		this.personality = personality;
+		this.mark = mark;
+	}
+	
+	public Rating(String id) {
+		this.id = Integer.parseInt(id);
+	}
+
 	public int getId() {
 		return id;
+	}
+
+	public void setId(String id) throws NumberFormatException {
+		this.id = Integer.parseInt(id);
 	}
 
 	public void setId(int id) {
@@ -22,6 +37,10 @@ public class Rating implements Entity {
 		return professional;
 	}
 
+	public void setProfessional(String professional) throws NumberFormatException {
+		this.id = Integer.parseInt(professional);
+	}
+
 	public void setProfessional(int professional) {
 		this.professional = professional;
 	}
@@ -29,7 +48,10 @@ public class Rating implements Entity {
 	public int getPersonality() {
 		return personality;
 	}
-	//
+
+	public void setPersonality(String personality) throws NumberFormatException {
+		this.personality = Integer.parseInt(personality);
+	}
 
 	public void setPersonality(int personality) {
 		this.personality = personality;
@@ -37,6 +59,10 @@ public class Rating implements Entity {
 
 	public int getMark() {
 		return mark;
+	}
+
+	public void setMark(String mark) throws NumberFormatException {
+		this.mark = Integer.parseInt(mark);
 	}
 
 	public void setMark(int mark) {
