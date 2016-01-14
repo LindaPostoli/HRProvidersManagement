@@ -3,7 +3,7 @@ package it.synclab.hrpm.model;
 public class Reference implements Channel {
 
 	private String name, surname, referenceCompany, phoneNumber, opinion, eMail;
-	private static final String HEADER = "SURNAME;NAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION;E_MAIL;";
+	private static final String HEADER = "NAME;SURNAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION;E_MAIL;";
 
 	public Reference(String name, String surname, String referenceCompany, String phoneNumber, String opinion,
 			String eMail) {
@@ -12,6 +12,10 @@ public class Reference implements Channel {
 		this.referenceCompany = referenceCompany;
 		this.phoneNumber = phoneNumber;
 		this.opinion = opinion;
+		this.eMail = eMail;
+	}
+		
+	public Reference(String eMail) {
 		this.eMail = eMail;
 	}
 
