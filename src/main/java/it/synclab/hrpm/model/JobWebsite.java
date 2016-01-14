@@ -5,6 +5,10 @@ public class JobWebsite implements Channel {
 	private String url, name;
 	private static final String HEADER = "URL;NAME";
 
+	public JobWebsite(String url) {
+		this.url = url;
+	}
+	
 	public String getName() {
 		return name;
 	}

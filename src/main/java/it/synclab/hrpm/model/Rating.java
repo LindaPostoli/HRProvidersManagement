@@ -24,8 +24,14 @@ public class Rating implements Entity {
 	public int getId() {
 		return id;
 	}
-
-	public void setId(String id) throws NumberFormatException {
+	
+	/**
+	 * 
+	 * @param id
+	 *            as Integer format
+	 *            
+	 */
+	public void setId(String id) {
 		this.id = Integer.parseInt(id);
 	}
 
@@ -36,8 +42,14 @@ public class Rating implements Entity {
 	public int getProfessional() {
 		return professional;
 	}
-
-	public void setProfessional(String professional) throws NumberFormatException {
+	
+	/**
+	 * 
+	 * @param Professional
+	 *            as Integer format
+	 *            
+	 */
+	public void setProfessional(String professional) {
 		this.id = Integer.parseInt(professional);
 	}
 
@@ -48,8 +60,14 @@ public class Rating implements Entity {
 	public int getPersonality() {
 		return personality;
 	}
-
-	public void setPersonality(String personality) throws NumberFormatException {
+	
+	/**
+	 * 
+	 * @param personality
+	 *            as Integer format
+	 *            
+	 */
+	public void setPersonality(String personality) {
 		this.personality = Integer.parseInt(personality);
 	}
 
@@ -60,8 +78,14 @@ public class Rating implements Entity {
 	public int getMark() {
 		return mark;
 	}
-
-	public void setMark(String mark) throws NumberFormatException {
+	
+	/**
+	 * 
+	 * @param mark
+	 *            as Integer format
+	 *            
+	 */
+	public void setMark(String mark) {
 		this.mark = Integer.parseInt(mark);
 	}
 

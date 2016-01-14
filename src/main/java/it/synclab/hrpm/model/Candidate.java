@@ -1,7 +1,6 @@
 package it.synclab.hrpm.model;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import it.synclab.hrpm.enumeration.ChannelType;
