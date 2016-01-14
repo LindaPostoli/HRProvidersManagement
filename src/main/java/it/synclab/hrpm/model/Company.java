@@ -151,4 +151,9 @@ public class Company implements Channel {
 		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail;
 	}
 
+	public String getKey() {
+
+		return name;
+	}
+
 }

@@ -108,4 +108,8 @@ public class Stage implements Channel {
 		return title + ";" + tutor + ";" + fromDate + ";" + toDate + ";";
 	}
 
+	public String getKey() {
+		return title;
+	}
+
 }

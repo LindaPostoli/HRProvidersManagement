@@ -10,13 +10,14 @@ import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Company;
+import it.synclab.hrpm.model.UnsolicitedApplication;
 import it.synclab.hrpm.services.CandidateService;
 import it.synclab.hrpm.services.ChannelService;
 
 public class HRManagement {
 	public static void main(String[] args) throws Exception {
 		
-		ConnectionPool connectionPool = new ConnectionPool();
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		Connection conn1 = connectionPool.getConnection();
 		connectionPool.releaseConnection(conn1);
 		Connection conn2 = connectionPool.getConnection();
@@ -24,9 +25,9 @@ public class HRManagement {
 		Connection conn4 = connectionPool.getConnection();
 		Connection conn5 = connectionPool.getConnection();
 		
-		System.out.println(connectionPool.getConnectionNumberAvailable());
-		
-		bootstrap();
+		System.out.println("Numero connessioni disponibili: " + connectionPool.getConnectionNumberAvailable());
+				
+		//bootstrap();
 	}
 
 	private static void bootstrap() throws ParseException {
@@ -40,15 +41,21 @@ public class HRManagement {
 		CandidateService cs = new CandidateService(criteria);
 
 		Company synclab = (Company) ChannelFactory.getInstance(ChannelType.COMPANY);
+		
+		
 		synclab.setName("SyncLab");
 		Candidate candidate = new Candidate("hgjfaljv", ChannelType.COMPANY);
+
+		
+		
 		candidate.setBirthDate("03/05/1987");
+
 		cs.insert(candidate);
 		ChannelService chs = new ChannelService(criteria);
 		chs.insert(synclab);
+	
+		Candidate candidate2 = new Candidate("hgjfsssjv", ChannelType.UNSOLICITED_APPLICATION);
 		
-		
-			
 	}
 
 }

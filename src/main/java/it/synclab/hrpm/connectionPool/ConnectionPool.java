@@ -6,45 +6,56 @@ import java.util.List;
 import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.core.DBConnection;
 import it.synclab.hrpm.exception.ConnectionNotFoundException;
+import it.synclab.hrpm.exception.ConnectionPoolAlreadyInstantiated;
 import it.synclab.hrpm.exception.FullConnectionPoolException;
 
 public class ConnectionPool {
 
-	private List<Connection> connectionPool;
+	private static ConnectionPool connectionPool = null;
+	private List<Connection> listConnections;
 	private static final int NUM_CONNECTIONS = 10;
 
-	public ConnectionPool() {
-		connectionPool = new ArrayList<Connection>();
+	private ConnectionPool() {
+		listConnections = new ArrayList<Connection>();
 		init();
 	}
 
-	/* Questo metodo si può invocare solo una volta */
 	public void init() {
 		for (int i = 0; i < NUM_CONNECTIONS; i++)
-			connectionPool.add(new DBConnection());
+			listConnections.add(new DBConnection());
 
 	}
 
-	public Connection getConnection() throws ConnectionNotFoundException {
-		if (connectionPool.isEmpty())
+	public static ConnectionPool getInstance() throws ConnectionPoolAlreadyInstantiated {
+		if (connectionPool != null)
+			throw new ConnectionPoolAlreadyInstantiated(
+					"An instance of ConnectionPool already exists, impossible creating another one");
+
+		connectionPool = new ConnectionPool();
+
+		return connectionPool;
+	}
+
+	public Connection getConnection() {
+		if (listConnections.isEmpty())
 			throw new ConnectionNotFoundException("No more connections available");
 
-		for (int i = 0; i < connectionPool.size(); i++)
-			if (connectionPool.get(i) != null)
-				return connectionPool.remove(i);
+		for (int i = 0; i < listConnections.size(); i++)
+			if (listConnections.get(i) != null)
+				return listConnections.remove(i);
 
 		return null;
 	}
 
 	public void releaseConnection(Connection connection) throws FullConnectionPoolException {
-		if (connectionPool.size() >= NUM_CONNECTIONS)
+		if (listConnections.size() >= NUM_CONNECTIONS)
 			throw new FullConnectionPoolException("Connection Pool is already full");
 
-		connectionPool.add(connection);
+		listConnections.add(connection);
 	}
-	
-	public int getConnectionNumberAvailable(){
-		return connectionPool.size();
+
+	public int getConnectionNumberAvailable() {
+		return listConnections.size();
 	}
 
 }

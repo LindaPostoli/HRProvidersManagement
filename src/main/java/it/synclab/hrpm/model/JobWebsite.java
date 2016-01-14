@@ -65,4 +65,7 @@ public class JobWebsite implements Channel {
 		return url + ";" + name;
 	}
 
+	public String getKey() {
+		return url;
+	}
 }

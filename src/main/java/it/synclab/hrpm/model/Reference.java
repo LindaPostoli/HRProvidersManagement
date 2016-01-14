@@ -120,4 +120,8 @@ public class Reference implements Channel {
 		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";";
 	}
 
+	public String getKey() {
+		return surname;
+	}
+
 }
