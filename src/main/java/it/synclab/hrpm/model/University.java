@@ -17,6 +17,10 @@ public class University implements Channel {
 		this.fieldOfStudy = fieldOfStudy;
 	}
 
+	public University(String name) {
+		this.name = name;
+	}
+
 	public University() {
 		super();
 	}
