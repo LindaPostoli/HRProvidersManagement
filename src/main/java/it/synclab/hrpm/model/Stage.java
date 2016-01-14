@@ -36,6 +36,16 @@ public class Stage implements Channel {
 	public void setId(int id){
 		this.id = id;
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 *            as Integer format
+	 *            
+	 */
+	public void setId(String id) {
+		this.id = Integer.parseInt(id);
+	}
 
 	public String getTitle() {
 		return title;
