@@ -21,8 +21,14 @@ public class Stage implements Channel {
 		this.toDate = toDate;
 	}
 	
-	public Stage(int id) {
-		this.id = id;
+	/**
+	 * 
+	 * @param id
+	 *            as Integer format
+	 *            
+	 */
+	public Stage(String id) {
+		this.id = Integer.parseInt(id);
 	}
 	
 	public Stage() {
