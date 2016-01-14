@@ -9,7 +9,7 @@ import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.model.Candidate;
-import it.synclab.hrpm.model.Company;
+import it.synclab.hrpm.model.Provider;
 import it.synclab.hrpm.model.UnsolicitedApplication;
 import it.synclab.hrpm.services.CandidateService;
 import it.synclab.hrpm.services.ChannelService;
@@ -40,11 +40,11 @@ public class HRManagement {
 
 		CandidateService cs = new CandidateService(criteria);
 
-		Company synclab = (Company) ChannelFactory.getInstance(ChannelType.COMPANY);
+		Provider synclab = (Provider) ChannelFactory.getInstance(ChannelType.PROVIDER);
 		
 		
 		synclab.setName("SyncLab");
-		Candidate candidate = new Candidate("hgjfaljv", ChannelType.COMPANY);
+		Candidate candidate = new Candidate("hgjfaljv", ChannelType.PROVIDER);
 
 		
 		

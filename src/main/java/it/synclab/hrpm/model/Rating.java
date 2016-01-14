@@ -2,28 +2,37 @@ package it.synclab.hrpm.model;
 
 public class Rating implements Entity {
 
-	private String id;
-	private String professionalImpressions;
-	private String personalityImpressions;
+	private int id;
+	private int professional;
+	private int personality;
 	private int mark;
 
-	public static final String HEADER = "ID; PROFESSIONAL_IMPRESSIONS; PERSONALITY_IMPRESSIONS; MARK;";
+	public static final String HEADER = "ID;PROFESSIONAL_IMPRESSIONS;PERSONALITY_IMPRESSIONS;MARK";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
-	public String getProfessionalImpressions() {
-		return professionalImpressions;
+	public int getId() {
+		return id;
 	}
 
-	public void setProfessionalImpressions(String professionalImpressions) {
-		this.professionalImpressions = professionalImpressions;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getPersonalityImpressions() {
-		return personalityImpressions;
+	public int getProfessional() {
+		return professional;
 	}
 
-	public void setPersonalityImpressions(String personalityImpressions) {
-		this.personalityImpressions = personalityImpressions;
+	public void setProfessional(int professional) {
+		this.professional = professional;
+	}
+
+	public int getPersonality() {
+		return personality;
+	}
+	//
+
+	public void setPersonality(int personality) {
+		this.personality = personality;
 	}
 
 	public int getMark() {
@@ -38,28 +47,20 @@ public class Rating implements Entity {
 		return HEADER;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", professionalImpressions=" + professionalImpressions + ", personalityImpressions="
-				+ personalityImpressions + ", mark=" + mark + "]";
+		return "Rating [id=" + id + ", professional=" + professional + ", personality=" + personality + ", mark=" + mark
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		result = prime * result + mark;
-		result = prime * result + ((personalityImpressions == null) ? 0 : personalityImpressions.hashCode());
-		result = prime * result + ((professionalImpressions == null) ? 0 : professionalImpressions.hashCode());
+		result = prime * result + personality;
+		result = prime * result + professional;
 		return result;
 	}
 
@@ -72,33 +73,22 @@ public class Rating implements Entity {
 		if (getClass() != obj.getClass())
 			return false;
 		Rating other = (Rating) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		if (mark != other.mark)
 			return false;
-		if (personalityImpressions == null) {
-			if (other.personalityImpressions != null)
-				return false;
-		} else if (!personalityImpressions.equals(other.personalityImpressions))
+		if (personality != other.personality)
 			return false;
-		if (professionalImpressions == null) {
-			if (other.professionalImpressions != null)
-				return false;
-		} else if (!professionalImpressions.equals(other.professionalImpressions))
+		if (professional != other.professional)
 			return false;
 		return true;
 	}
 
 	public String toCSV() {
-		return professionalImpressions + ";" + personalityImpressions + ";" + mark + ";";
+		return professional + ";" + personality + ";" + mark + ";";
 	}
 
 	public String getKey() {
-		// TODO Auto-generated method stub
-		return id;
+		return String.valueOf(id);
 	}
-
 }
