@@ -15,7 +15,11 @@ public class Provider implements Channel {//TODO change from Company to Provider
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
 	}
-
+	
+	public Provider(String name) {
+		this.name = name;
+	}
+	
 	public Provider() {
 		super();
 	}
