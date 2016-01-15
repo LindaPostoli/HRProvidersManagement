@@ -10,6 +10,7 @@ import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Provider;
+import it.synclab.hrpm.model.Rating;
 import it.synclab.hrpm.model.UnsolicitedApplication;
 import it.synclab.hrpm.services.CandidateService;
 import it.synclab.hrpm.services.ChannelService;
@@ -25,7 +26,18 @@ public class HRManagement {
 		Connection conn4 = connectionPool.getConnection();
 		Connection conn5 = connectionPool.getConnection();
 		
-		System.out.println("Numero connessioni disponibili: " + connectionPool.getConnectionNumberAvailable());
+		System.out.println("Numero connessioni disponibili nel ConnectionPool: " + connectionPool.getConnectionNumberAvailable());
+		
+		FileManager fm = new FileManager();
+		Rating r1 = new Rating(1,5,6,6);
+		Rating r2 = new Rating(2,7,8,7);
+		Rating r3 = new Rating(3,10,9,9);
+		
+		fm.insert(r1);
+		fm.insert(r2);
+		fm.insert(r3);
+		fm.delete(r1);
+		fm.delete(r3);
 				
 		//bootstrap();
 	}
