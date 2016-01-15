@@ -2,6 +2,7 @@ package it.synclab.hrpm.bootstrap;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import it.synclab.hrpm.model.Entity;
 import it.synclab.hrpm.model.Rating;
 
 public class FileManager {
+	
+	private static final String TOKEN_SEPARATOR = ";";
 
 	private static void newFile(String fileName, String header) {
 		File file = new File(fileName);
@@ -58,6 +61,37 @@ public class FileManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public void delete(Entity obj) throws FileNotFoundException, IOException{
+		final String nameFileSorg = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
+		final String nameFileDest = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + "Copy.csv";
+		
+		BufferedReader readerSorg= new BufferedReader(new FileReader(nameFileSorg));
+		File fileDest = new File(nameFileDest);
+		FileWriter writerDest = new FileWriter(fileDest); 
+		
+		String key = obj.getKey();
+		String line = "";
+		
+		while((line = readerSorg.readLine()) != null){
+			if(!(line.split(TOKEN_SEPARATOR)[0].equals(key)))
+				writerDest.write(line + "\n");
+		}
+		writerDest.close();
+		
+		BufferedReader readerDest = new BufferedReader(new FileReader(fileDest));
+		FileWriter writerSorg = new FileWriter(nameFileSorg);
+		
+		while((line = readerDest.readLine()) != null)
+			writerSorg.write(line + "\n");
+		
+		readerSorg.close();
+		readerDest.close();
+		writerSorg.close();
+		
+		fileDest.delete();
 	}
 }
 
