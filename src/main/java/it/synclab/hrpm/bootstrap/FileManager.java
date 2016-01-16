@@ -8,16 +8,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import it.synclab.hrpm.enumeration.ChannelType;
+import it.synclab.hrpm.enumeration.ConnectionCriteria;
+import it.synclab.hrpm.exception.KeyNotFoundException;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.factory.FileNameFactory;
 import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Channel;
 import it.synclab.hrpm.model.Entity;
 import it.synclab.hrpm.model.Rating;
+import it.synclab.hrpm.parser.*;
 
 public class FileManager {
-	
-	private static final String TOKEN_SEPARATOR = ";";
 
 	private static void newFile(String fileName, String header) {
 		File file = new File(fileName);
@@ -72,17 +73,53 @@ public class FileManager {
 		File fileDest = new File(nameFileDest);
 		FileWriter writerDest = new FileWriter(fileDest); 
 		
-		String key = obj.getKey();
-		String line = "";
+		ParserManager parserManager = null;
+
+		switch(obj.getClass().getSimpleName().toLowerCase()){
+		case "candidate":
+			parserManager = new CandidateParser();
+			break;
+			
+		case "rating":
+			parserManager = new RatingParser();
+			break;
+			
+		case "jobwebsite":
+			parserManager = new JobWebsiteParser();
+			break;
+			
+		case "provider":
+			parserManager = new ProviderParser();
+			break;
+			
+		case "reference":
+			parserManager = new ReferenceParser();
+			break;
+			
+		case "stage":
+			parserManager = new StageParser();
+			break;
+			
+		case "university":
+			parserManager = new UniversityParser();
 		
+		}
+		
+		String line = "";
+		line = readerSorg.readLine();
 		while((line = readerSorg.readLine()) != null){
-			if(!(line.split(TOKEN_SEPARATOR)[0].equals(key)))
-				writerDest.write(line + "\n");
+			try {
+				if(!(parserManager.parse(line).equals(obj)))
+					writerDest.write(line + "\n");
+			} catch (KeyNotFoundException e) {
+				e.toString();
+			}
 		}
 		writerDest.close();
 		
 		BufferedReader readerDest = new BufferedReader(new FileReader(fileDest));
 		FileWriter writerSorg = new FileWriter(nameFileSorg);
+		writerSorg.write(Rating.HEADER + "\n");
 		
 		while((line = readerDest.readLine()) != null)
 			writerSorg.write(line + "\n");
@@ -95,32 +132,5 @@ public class FileManager {
 	}
 }
 
-/*
- * TO CHANGE
- * 
- * public static void delete(Entity obj) throws IOException {
- * 
- * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
- * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
- * FileWriter writer = new FileWriter(fileName); String line = ""; String key =
- * ((Candidate) obj).getKey(); if (obj instanceof Candidate) { while ((line =
- * br.readLine()) != null) { if ((line.split(";")[0]).equals(key)) //
- * entity.equals(obj) writer.write("");
- * 
- * }
- * 
- * } }
- * 
- * 
- * 
- * 
- * public static void update(Entity obj) throws IOException {
- * 
- * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
- * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
- * FileWriter writer = new FileWriter(fileName);
- * 
- * }
- * 
- * }
- */
+
+
