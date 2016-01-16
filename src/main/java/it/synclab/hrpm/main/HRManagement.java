@@ -5,6 +5,7 @@ import java.text.ParseException;
 import it.synclab.hrpm.bootstrap.FileManager;
 import it.synclab.hrpm.connectionPool.ConnectionPool;
 import it.synclab.hrpm.core.Connection;
+import it.synclab.hrpm.core.FileConnection;
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ChannelFactory;
@@ -32,10 +33,13 @@ public class HRManagement {
 		Rating r1 = new Rating(1,5,6,6);
 		Rating r2 = new Rating(2,7,8,7);
 		Rating r3 = new Rating(3,10,9,9);
+		Rating r4 = new Rating(4,6,9,8);
+
 		
 		fm.insert(r1);
 		fm.insert(r2);
 		fm.insert(r3);
+		fm.insert(r4);
 		fm.delete(r1);
 		fm.delete(r3);
 				
