@@ -50,7 +50,7 @@ public class Rating implements Entity {
 	 *            
 	 */
 	public void setProfessional(String professional) {
-		this.id = Integer.parseInt(professional);
+		this.professional = Integer.parseInt(professional);
 	}
 
 	public void setProfessional(int professional) {
@@ -121,7 +121,7 @@ public class Rating implements Entity {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
-			return false;
+			return false; 
 		Rating other = (Rating) obj;
 		if (id != other.id)
 			return false;
