@@ -22,7 +22,7 @@ public class DBManager {
 
 		Connection con = (Connection) cp.getConnection();
 		String query = "insert into  (name, age) values (?, ?)";
-		
+		//fix query statements
 		
 		
 
