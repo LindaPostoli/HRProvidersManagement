@@ -1,5 +1,7 @@
 package it.synclab.hrpm.services;
 
+import java.sql.SQLException;
+
 import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.factory.ConnectionFactory;
@@ -8,7 +10,7 @@ import it.synclab.hrpm.model.Entity;
 public class PersistentService<T extends Entity> {
 	private Connection connection;
 
-	public PersistentService(ConnectionCriteria criteria) {
+	public PersistentService(ConnectionCriteria criteria) throws ClassNotFoundException, SQLException {
 		connection = ConnectionFactory.getInstance(criteria);
 	}
 
