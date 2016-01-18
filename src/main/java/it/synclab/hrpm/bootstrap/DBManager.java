@@ -12,12 +12,13 @@ import it.synclab.hrpm.model.Entity;
 
 public class DBManager {
 
-	private ConnectionPool cp;
+	private static ConnectionPool cp;
 
-	public void init() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		this.cp = ConnectionPool.getInstance();
+	public static final void init() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		cp = ConnectionPool.getInstance();
 	};
-
+	
+	
 	public void insert(Entity obj) {
 
 		Connection con = (Connection) cp.getConnection();

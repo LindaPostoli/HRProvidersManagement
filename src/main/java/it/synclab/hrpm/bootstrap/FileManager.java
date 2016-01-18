@@ -2,17 +2,21 @@ package it.synclab.hrpm.bootstrap;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import it.synclab.hrpm.enumeration.ChannelType;
+import it.synclab.hrpm.enumeration.ConnectionCriteria;
+import it.synclab.hrpm.exception.KeyNotFoundException;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.factory.FileNameFactory;
 import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Channel;
 import it.synclab.hrpm.model.Entity;
 import it.synclab.hrpm.model.Rating;
+import it.synclab.hrpm.parser.*;
 
 public class FileManager {
 
@@ -59,34 +63,74 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void delete(Entity obj) throws FileNotFoundException, IOException{
+		final String nameFileSorg = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
+		final String nameFileDest = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + "Copy.csv";
+		
+		BufferedReader readerSorg= new BufferedReader(new FileReader(nameFileSorg));
+		File fileDest = new File(nameFileDest);
+		FileWriter writerDest = new FileWriter(fileDest); 
+		
+		ParserManager parserManager = null;
+
+		switch(obj.getClass().getSimpleName().toLowerCase()){
+		case "candidate":
+			parserManager = new CandidateParser();
+			break;
+			
+		case "rating":
+			parserManager = new RatingParser();
+			break;
+			
+		case "jobwebsite":
+			parserManager = new JobWebsiteParser();
+			break;
+			
+		case "provider":
+			parserManager = new ProviderParser();
+			break;
+			
+		case "reference":
+			parserManager = new ReferenceParser();
+			break;
+			
+		case "stage":
+			parserManager = new StageParser();
+			break;
+			
+		case "university":
+			parserManager = new UniversityParser();
+		
+		}
+		
+		String line = "";
+		line = readerSorg.readLine();
+		while((line = readerSorg.readLine()) != null){
+			try {
+				if(!(parserManager.parse(line).equals(obj)))
+					writerDest.write(line + "\n");
+			} catch (KeyNotFoundException e) {
+				e.toString();
+			}
+		}
+		writerDest.close();
+		
+		BufferedReader readerDest = new BufferedReader(new FileReader(fileDest));
+		FileWriter writerSorg = new FileWriter(nameFileSorg);
+		writerSorg.write(Rating.HEADER + "\n");
+		
+		while((line = readerDest.readLine()) != null)
+			writerSorg.write(line + "\n");
+		
+		readerSorg.close();
+		readerDest.close();
+		writerSorg.close();
+		
+		fileDest.delete();
+	}
 }
 
-/*
- * TO CHANGE
- * 
- * public static void delete(Entity obj) throws IOException {
- * 
- * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
- * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
- * FileWriter writer = new FileWriter(fileName); String line = ""; String key =
- * ((Candidate) obj).getKey(); if (obj instanceof Candidate) { while ((line =
- * br.readLine()) != null) { if ((line.split(";")[0]).equals(key)) //
- * entity.equals(obj) writer.write("");
- * 
- * }
- * 
- * } }
- * 
- * 
- * 
- * 
- * public static void update(Entity obj) throws IOException {
- * 
- * String fileName = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() +
- * ".csv"; BufferedReader br = new BufferedReader(new FileReader(fileName));
- * FileWriter writer = new FileWriter(fileName);
- * 
- * }
- * 
- * }
- */
+
+

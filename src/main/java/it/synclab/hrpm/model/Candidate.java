@@ -19,7 +19,7 @@ public class Candidate implements Entity {
 	private ChannelType channelType;
 	
 
-	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;";
+	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL";
 	
 	
 
@@ -27,8 +27,9 @@ public class Candidate implements Entity {
 		this.taxCode = taxCode;
 	}
 	
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, String zipCode, String city, String country,
-			String phoneNumber, String eMail, Rating rating, ChannelType channelType) {
+	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, 
+			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, 
+			ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.name = name;
 		this.surname = surname;
@@ -44,8 +45,8 @@ public class Candidate implements Entity {
 		this.channelType = channelType;
 	}
 	
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, String zipCode, String city, String country,
-			String phoneNumber, String eMail) {
+	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, 
+			String zipCode, String city, String country, String phoneNumber, String eMail) {
 		this.taxCode = taxCode;
 		this.name = name;
 		this.surname = surname;
@@ -282,14 +283,15 @@ public class Candidate implements Entity {
 	
 	@Override
 	public String toString() {
-		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", birthPlace=" + birthPlace + ", address=" + address
-				+ ", zipCode=" + zipCode + ", city=" + city + ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating + ", channel="
-				+ channelType + "]";
+		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + 
+				", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + 
+				", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating + 
+				", channel=" + channelType + "]";
 	}
 	
 	public String toCSV() {
-		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" + birthPlace + ";" + address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail
-				+ ";";
+		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" +
+					birthPlace + ";" + address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail;
 	}
 	
 	public String getKey() {
