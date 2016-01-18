@@ -1,12 +1,12 @@
 package it.synclab.hrpm.connectionPool;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.synclab.hrpm.core.Connection;
-import it.synclab.hrpm.core.DBConnection;
 import it.synclab.hrpm.exception.ConnectionNotFoundException;
-import it.synclab.hrpm.exception.ConnectionPoolAlreadyInstantiatedException;
 import it.synclab.hrpm.exception.FullConnectionPoolException;
 
 public class ConnectionPool {
@@ -15,24 +15,28 @@ public class ConnectionPool {
 	private List<Connection> listConnections;
 	private static final int NUM_CONNECTIONS = 10;
 
-	private ConnectionPool() {
+	private ConnectionPool()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		listConnections = new ArrayList<Connection>();
 		init();
 	}
 
-	public void init() {
-		for (int i = 0; i < NUM_CONNECTIONS; i++)
-			listConnections.add(new DBConnection());
+	public void init() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/HRPM", "root",
+				"synclab");// FIXME: check username e password
+
+		for (int i = 0; i < NUM_CONNECTIONS; i++) {
+			listConnections.add(connection);
+		}
 
 	}
 
-	public static ConnectionPool getInstance() throws ConnectionPoolAlreadyInstantiatedException {
-		if (connectionPool != null)
-			throw new ConnectionPoolAlreadyInstantiatedException(
-					"An instance of ConnectionPool already exists, impossible creating another one");
-
-		connectionPool = new ConnectionPool();
-
+	public static ConnectionPool getInstance()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		if (connectionPool == null) {
+			connectionPool = new ConnectionPool();
+		}
 		return connectionPool;
 	}
 
@@ -40,11 +44,8 @@ public class ConnectionPool {
 		if (listConnections.isEmpty())
 			throw new ConnectionNotFoundException("No more connections available");
 
-		for (int i = 0; i < listConnections.size(); i++)
-			if (listConnections.get(i) != null)
-				return listConnections.remove(i);
+		return listConnections.remove(0);
 
-		return null;
 	}
 
 	public void releaseConnection(Connection connection) throws FullConnectionPoolException {

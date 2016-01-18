@@ -1,11 +1,13 @@
 package it.synclab.hrpm.services;
 
+import java.sql.SQLException;
+
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.model.Candidate;
 
 public class CandidateService extends PersistentService<Candidate> {
 	
-	public CandidateService(ConnectionCriteria criteria) {
+	public CandidateService(ConnectionCriteria criteria) throws ClassNotFoundException, SQLException {
 		super(criteria);
 	}
 	
