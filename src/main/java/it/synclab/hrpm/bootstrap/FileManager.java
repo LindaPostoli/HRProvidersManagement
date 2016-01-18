@@ -102,6 +102,11 @@ public class FileManager {
 			
 		case "university":
 			parserManager = new UniversityParser();
+			break;
+			
+		case "unsolicitedapplication":
+			parserManager = new UnsolicitedApplicationParser();
+			break;
 		
 		}
 		
