@@ -1,5 +1,7 @@
 package it.synclab.hrpm.factory;
 
+import java.sql.SQLException;
+
 import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.core.DBConnection;
 import it.synclab.hrpm.core.FileConnection;
@@ -8,7 +10,7 @@ import it.synclab.hrpm.exception.ConnectionNotFoundException;
 
 public class ConnectionFactory {
 	
-	public static final Connection getInstance(ConnectionCriteria criteria) {
+	public static final Connection getInstance(ConnectionCriteria criteria) throws ClassNotFoundException, SQLException {
 		
 		switch (criteria) {
 			case FILE:
