@@ -3,7 +3,7 @@ package it.synclab.hrpm.model;
 public class Reference implements Channel {
 
 	private String name, surname, referenceCompany, phoneNumber, opinion, eMail;
-	private static final String HEADER = "NAME;SURNAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION;E_MAIL;";
+	private static final String HEADER = "NAME;SURNAME;REFERENCE_COMPANY;PHONE_NUMBER;OPINION;E_MAIL";
 
 	public Reference(String name, String surname, String referenceCompany, String phoneNumber, String opinion,
 			String eMail) {
@@ -137,7 +137,7 @@ public class Reference implements Channel {
 	}
 
 	public String toCSV() {
-		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";" + eMail + ";";
+		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";" + eMail;
 	}
 
 	public String getKey() {

@@ -135,7 +135,7 @@ public class Rating implements Entity {
 	}
 
 	public String toCSV() {
-		return id + ";" + professional + ";" + personality + ";" + mark + ";";
+		return id + ";" + professional + ";" + personality + ";" + mark;
 	}
 
 	public String getKey() {

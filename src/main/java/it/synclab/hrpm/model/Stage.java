@@ -157,11 +157,13 @@ public class Stage implements Channel {
 
 	@Override
 	public String toString() {
-		return "Stage [id=" + id + ", title=" + title + ", tutor=" + tutor + ", fromDate=" + fromDate + ", toDate=" + toDate + "]";
+		return "Stage [id=" + id + ", title=" + title + ", tutor=" + tutor + ", fromDate=" + fromDate + 
+				", toDate=" + toDate + "]";
 	}
 
 	public String toCSV() {
-		return id + ";" + title + ";" + tutor + ";" + CalendarUtil.toString(fromDate) + ";" + CalendarUtil.toString(toDate) + ";";
+		return id + ";" + title + ";" + tutor + ";" + CalendarUtil.toString(fromDate) + ";" + 
+				CalendarUtil.toString(toDate);
 	}
 
 	public String getKey() {
