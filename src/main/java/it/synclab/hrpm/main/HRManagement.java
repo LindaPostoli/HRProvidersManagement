@@ -34,12 +34,15 @@ public class HRManagement {
 		Rating r2 = new Rating(2,7,8,7);
 		Rating r3 = new Rating(3,10,9,9);
 		Rating r4 = new Rating(4,6,9,8);
-
+		
+		System.out.println(r1.toCSV());
 		
 		fm.insert(r1);
 		fm.insert(r2);
 		fm.insert(r3);
 		fm.insert(r4);
+		
+		
 		fm.delete(r1);
 		fm.delete(r3);
 				
@@ -71,6 +74,7 @@ public class HRManagement {
 		chs.insert(synclab);
 	
 		Candidate candidate2 = new Candidate("hgjfsssjv", ChannelType.UNSOLICITED_APPLICATION);
+		
 		
 	}
 
