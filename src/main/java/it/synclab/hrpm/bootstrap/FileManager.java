@@ -6,12 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.exception.KeyNotFoundException;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.factory.FileNameFactory;
+import it.synclab.hrpm.factory.ParserManagerFactory;
 import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Channel;
 import it.synclab.hrpm.model.Entity;
@@ -65,7 +68,7 @@ public class FileManager {
 	}
 	
 	
-	public void delete(Entity obj) throws FileNotFoundException, IOException{
+	public void delete(Entity obj) throws FileNotFoundException, IOException, ClassNotFoundException{
 		final String nameFileSorg = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
 		final String nameFileDest = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + "Copy.csv";
 		
@@ -73,42 +76,7 @@ public class FileManager {
 		File fileDest = new File(nameFileDest);
 		FileWriter writerDest = new FileWriter(fileDest); 
 		
-		ParserManager parserManager = null;
-
-		switch(obj.getClass().getSimpleName().toLowerCase()){
-		case "candidate":
-			parserManager = new CandidateParser();
-			break;
-			
-		case "rating":
-			parserManager = new RatingParser();
-			break;
-			
-		case "jobwebsite":
-			parserManager = new JobWebsiteParser();
-			break;
-			
-		case "provider":
-			parserManager = new ProviderParser();
-			break;
-			
-		case "reference":
-			parserManager = new ReferenceParser();
-			break;
-			
-		case "stage":
-			parserManager = new StageParser();
-			break;
-			
-		case "university":
-			parserManager = new UniversityParser();
-			break;
-			
-		case "unsolicitedapplication":
-			parserManager = new UnsolicitedApplicationParser();
-			break;
-		
-		}
+		ParserManager parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
 		
 		String line = "";
 		line = readerSorg.readLine();
