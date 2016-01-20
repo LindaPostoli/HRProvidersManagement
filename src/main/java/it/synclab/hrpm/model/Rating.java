@@ -156,4 +156,6 @@ public class Rating implements Entity {
 	public String getKey() {
 		return String.valueOf(id);
 	}
+
+	
 }
