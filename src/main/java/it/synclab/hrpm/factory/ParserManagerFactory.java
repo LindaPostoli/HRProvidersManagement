@@ -1,42 +1,36 @@
 package it.synclab.hrpm.factory;
 
-import it.synclab.hrpm.parser.CandidateParser;
-import it.synclab.hrpm.parser.JobWebsiteParser;
-import it.synclab.hrpm.parser.ParserManager;
-import it.synclab.hrpm.parser.ProviderParser;
-import it.synclab.hrpm.parser.RatingParser;
-import it.synclab.hrpm.parser.ReferenceParser;
-import it.synclab.hrpm.parser.StageParser;
-import it.synclab.hrpm.parser.UniversityParser;
+import it.synclab.hrpm.parser.*;
 
 public class ParserManagerFactory {
 
 	public static final ParserManager getInstance(String typeParser) {
 
-		switch (typeParser.toLowerCase()) {
-		case "candidate":
+		if(typeParser.equalsIgnoreCase("candidate")) 
 			return new CandidateParser();
 
-		case "rating":
+		if(typeParser.equalsIgnoreCase("rating")) 
 			return new RatingParser();
 
-		case "jobwebsite":
-			return new JobWebsiteParser();
-
-		case "provider":
+		if(typeParser.equalsIgnoreCase("provider")) 
 			return new ProviderParser();
 
-		case "reference":
+		if(typeParser.equalsIgnoreCase("reference"))
 			return new ReferenceParser();
+			
+		if(typeParser.equalsIgnoreCase("jobwebsite")) 
+			return new JobWebsiteParser();
 
-		case "stage":
+		if(typeParser.equalsIgnoreCase("stage")) 
 			return new StageParser();
 
-		case "university":
+		if(typeParser.equalsIgnoreCase("university")) 
 			return new UniversityParser();
 
-		}
+		if(typeParser.equalsIgnoreCase("unsolicitedapplication")) 
+			return new UnsolicitedApplicationParser();
+
 		return null;
 	}
-
 }
+
