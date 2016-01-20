@@ -3,16 +3,16 @@ package it.synclab.hrpm.model;
 public class Rating implements Entity {
 
 	private int id;
-	private int professional;
+	private int professionality;
 	private int personality;
 	private int mark;
 
 	public static final String HEADER = "ID;PROFESSIONAL_IMPRESSIONS;PERSONALITY_IMPRESSIONS;MARK";
 	// TODO: insert attributo per il numero di colloqui (se più di uno)
 
-	public Rating(int id, int professional, int personality, int mark) {
+	public Rating(int id, int professionality, int personality, int mark) {
 		this.id = id;
-		this.professional = professional;
+		this.professionality = professionality;
 		this.personality = personality;
 		this.mark = mark;
 	}
@@ -39,8 +39,8 @@ public class Rating implements Entity {
 		this.id = id;
 	}
 
-	public int getProfessional() {
-		return professional;
+	public int getProfessionality() {
+		return professionality;
 	}
 	
 	/**
@@ -49,12 +49,12 @@ public class Rating implements Entity {
 	 *            as Integer format
 	 *            
 	 */
-	public void setProfessional(String professional) {
-		this.professional = Integer.parseInt(professional);
+	public void setProfessionality(String professionality) {
+		this.professionality = Integer.parseInt(professionality);
 	}
 
-	public void setProfessional(int professional) {
-		this.professional = professional;
+	public void setProfessionality(int professionality) {
+		this.professionality = professionality;
 	}
 
 	public int getPersonality() {
@@ -99,7 +99,7 @@ public class Rating implements Entity {
 
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", professional=" + professional + ", personality=" + personality + ", mark=" + mark
+		return "Rating [id=" + id + ", professionality=" + professionality + ", personality=" + personality + ", mark=" + mark
 				+ "]";
 	}
 
@@ -110,7 +110,7 @@ public class Rating implements Entity {
 		result = prime * result + id;
 		result = prime * result + mark;
 		result = prime * result + personality;
-		result = prime * result + professional;
+		result = prime * result + professionality;
 		return result;
 	}
 
@@ -129,13 +129,13 @@ public class Rating implements Entity {
 			return false;
 		if (personality != other.personality)
 			return false;
-		if (professional != other.professional)
+		if (professionality != other.professionality)
 			return false;
 		return true;
 	}
 
 	public String toCSV() {
-		return id + ";" + professional + ";" + personality + ";" + mark;
+		return id + ";" + professionality + ";" + personality + ";" + mark;
 	}
 
 	public String getKey() {
