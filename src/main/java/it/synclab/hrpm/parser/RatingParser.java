@@ -14,9 +14,10 @@ public class RatingParser extends ParserManager<Rating> {
 		Rating rating = new Rating(data[0]);
 
 		try {
-			rating.setProfessional(data[1] == null ? "" : data[1]);
+			rating.setProfessionality(data[1] == null ? "" : data[1]);
 			rating.setPersonality(data[2] == null ? "" : data[2]);
-			rating.setMark(data[3] == null ? "" : data[3]);
+			rating.setGeneral(data[3] == null ? "" : data[3]);
+			rating.setNote(data[4] == null ? "" : data[4]);
 
 		} catch (NumberFormatException e) {
 			System.out.println("Not valid input");
