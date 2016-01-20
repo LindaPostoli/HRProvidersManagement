@@ -1,11 +1,14 @@
 package it.synclab.hrpm.regex;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegExpUtil {
 
 	private static final String nameRegex = "[A-Z]+[a-z]*";
 	private static final String surnameRegex = "[A-Z]+[a-z]*";
 	private static final String taxCodeRegex = "[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]";
-	private static final String phoneNumberRegex = "\\++39+3+[0-9]{7}";
+	private static final String phoneNumberRegex = "\\++39+3+[0-9]{9}";
 	private static final String eMailRegex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
 	private static final String addressRegex = "[a-zA-Z\\ ]*+ +[0-9]*";
 	private static final String zipCodeRegex = "[0-9]{5}";
@@ -15,59 +18,70 @@ public class RegExpUtil {
 	private static final String birthPlaceRegex = "[A-Z]+[a-z]*";
 	private static final String urlRegex = "http\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}(/\\S*)?";
 
-	public boolean checkNameFormat(String name) {
-
-		return true;
+	private static Pattern p; 
+	private static Matcher m;
+	
+	
+	public static boolean validRegexFormat(String field, String regex) {
+		p = Pattern.compile(regex);
+		m = p.matcher(field);
+		
+		return m.matches();
+	}
+	
+	public static boolean checkNameFormat(String name) {
+		
+		return validRegexFormat(name, nameRegex);
 	}
 
-	public boolean checkSurnameFormat(String surname) {
-
-		return true;
+	public static boolean checkSurnameFormat(String surname) {
+		
+		return validRegexFormat(surname, surnameRegex);
 	}
 
-	public boolean checkTaxCodeFormat(String taxCode) {
-
-		return true;
+	public static boolean checkTaxCodeFormat(String taxCode) {
+		
+		return validRegexFormat(taxCode, taxCodeRegex);
 	}
 
-	public boolean checkPhoneNumberFormat(String phoneNumber) {
-
-		return true;
+	public static boolean checkPhoneNumberFormat(String phoneNumber) {
+		
+		return validRegexFormat(phoneNumber, phoneNumberRegex);
 	}
 
-	public boolean checkEMmailFormat(String eMail) {
-
-		return true;
+	public static boolean checkEMmailFormat(String eMail) {
+		
+		return validRegexFormat(eMail, eMailRegex);
 	}
 
-	public boolean checkAddressFormat(String address) {
-
-		return true;
+	public static boolean checkAddressFormat(String address) {
+		
+		return validRegexFormat(address, addressRegex);
 	}
 
-	public boolean checkZipCodeFormat(String zipCode) {
-
-		return true;
+	public static boolean checkZipCodeFormat(String zipCode) {
+		
+		return validRegexFormat(zipCode, zipCodeRegex);
 	}
 
-	public boolean checkCityFormat(String city) {
-
-		return true;
+	public static boolean checkCityFormat(String city) {
+		
+		return validRegexFormat(city, cityRegex);
 	}
 
-	public boolean checkCountryFormat(String country) {
-
-		return true;
+	public static boolean checkCountryFormat(String country) {
+		
+		return validRegexFormat(country, countryRegex);
 	}
 
-	public boolean checkBirthPlaceFormat(String birthPlace) {
+	public static boolean checkBirthPlaceFormat(String birthPlace) {
 
-		return true;
+		return validRegexFormat(birthPlace, birthPlaceRegex);
 	}
 
-	public boolean checkUrlFormat(String url) {
-
-		return true;
+	public static boolean checkUrlFormat(String url) {
+		
+		return validRegexFormat(url, urlRegex);
 	}
 
 }
