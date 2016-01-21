@@ -18,70 +18,70 @@ public class RegExpUtil {
 	private static final String birthPlaceRegex = "[A-Z]+[a-z]*";
 	private static final String urlRegex = "http\\://[a-zA-Z0-9\\-\\.]+\\.[a-zA-Z]{2,3}(/\\S*)?";
 
-	private static Pattern p; 
+	private static Pattern p;
 	private static Matcher m;
+
 	
-	
-	public static boolean validRegexFormat(String field, String regex) {
-		p = Pattern.compile(regex);
+	public static boolean validRegexFormat(String field) {
 		m = p.matcher(field);
-		
+
 		return m.matches();
 	}
+
 	
 	public static boolean checkNameFormat(String name) {
-		
-		return validRegexFormat(name, nameRegex);
+		p = Pattern.compile(nameRegex);
+		return validRegexFormat(name);
 	}
 
 	public static boolean checkSurnameFormat(String surname) {
-		
-		return validRegexFormat(surname, surnameRegex);
+		p = Pattern.compile(surnameRegex);
+		return validRegexFormat(surname);
 	}
 
 	public static boolean checkTaxCodeFormat(String taxCode) {
-		
-		return validRegexFormat(taxCode, taxCodeRegex);
+		p = Pattern.compile(taxCodeRegex);
+		return validRegexFormat(taxCode);
 	}
 
 	public static boolean checkPhoneNumberFormat(String phoneNumber) {
-		
-		return validRegexFormat(phoneNumber, phoneNumberRegex);
+		p = Pattern.compile(phoneNumberRegex);
+		return validRegexFormat(phoneNumber);
 	}
 
 	public static boolean checkEMmailFormat(String eMail) {
-		
-		return validRegexFormat(eMail, eMailRegex);
+		p = Pattern.compile(eMailRegex);
+		return validRegexFormat(eMail);
 	}
 
 	public static boolean checkAddressFormat(String address) {
-		
-		return validRegexFormat(address, addressRegex);
+		p = Pattern.compile(addressRegex);
+		return validRegexFormat(address);
 	}
 
 	public static boolean checkZipCodeFormat(String zipCode) {
-		
-		return validRegexFormat(zipCode, zipCodeRegex);
+		p = Pattern.compile(zipCodeRegex);
+		return validRegexFormat(zipCode);
 	}
 
 	public static boolean checkCityFormat(String city) {
-		
-		return validRegexFormat(city, cityRegex);
+		p = Pattern.compile(cityRegex);
+		return validRegexFormat(city);
 	}
 
 	public static boolean checkCountryFormat(String country) {
-		
-		return validRegexFormat(country, countryRegex);
+		p = Pattern.compile(countryRegex);
+		return validRegexFormat(country);
 	}
 
 	public static boolean checkBirthPlaceFormat(String birthPlace) {
-
-		return validRegexFormat(birthPlace, birthPlaceRegex);
+		p = Pattern.compile(birthPlaceRegex);
+		return validRegexFormat(birthPlace);
 	}
 
 	public static boolean checkUrlFormat(String url) {
-		
-		return validRegexFormat(url, urlRegex);
+		p = Pattern.compile(urlRegex);
+		return validRegexFormat(url);
 	}
 
 }
