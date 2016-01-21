@@ -70,7 +70,7 @@ public class JobWebsite implements Channel {
 	}
 
 	public String toCSV() {
-		return url + ";" + name;
+		return url + ";" + name + ";";
 	}
 
 	public String getKey() {

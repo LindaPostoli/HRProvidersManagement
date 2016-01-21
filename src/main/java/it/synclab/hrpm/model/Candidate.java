@@ -291,7 +291,7 @@ public class Candidate implements Entity {
 	
 	public String toCSV() {
 		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" +
-					birthPlace + ";" + address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail;
+					birthPlace + ";" + address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
 	
 	public String getKey() {

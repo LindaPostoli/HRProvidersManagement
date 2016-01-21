@@ -169,7 +169,7 @@ public class University implements Channel {
 
 	public String toCSV() {
 		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";"
-				+ fieldOfStudy;
+				+ fieldOfStudy + ";";
 	}
 
 	public String getKey() {

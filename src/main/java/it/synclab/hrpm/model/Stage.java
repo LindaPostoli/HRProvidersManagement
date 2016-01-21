@@ -163,7 +163,7 @@ public class Stage implements Channel {
 
 	public String toCSV() {
 		return id + ";" + title + ";" + tutor + ";" + CalendarUtil.toString(fromDate) + ";" + 
-				CalendarUtil.toString(toDate);
+				CalendarUtil.toString(toDate) + ";";
 	}
 
 	public String getKey() {

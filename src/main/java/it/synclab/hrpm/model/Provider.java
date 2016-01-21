@@ -152,7 +152,7 @@ public class Provider implements Channel {//TODO change from Company to Provider
 	}
 
 	public String toCSV() {
-		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail;
+		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
 
 	public String getKey() {

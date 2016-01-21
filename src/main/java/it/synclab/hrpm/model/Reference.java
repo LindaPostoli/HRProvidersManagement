@@ -137,7 +137,7 @@ public class Reference implements Channel {
 	}
 
 	public String toCSV() {
-		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";" + eMail;
+		return name + ";" + surname + ";" + referenceCompany + ";" + phoneNumber + ";" + opinion + ";" + eMail + ";";
 	}
 
 	public String getKey() {

@@ -52,7 +52,7 @@ public class UnsolicitedApplication implements Channel {
 	}
 
 	public String toCSV() {
-		return id + "Unsolicited Application";
+		return id + "Unsolicited Application" + ";";
 	}
 	
 	public String getKey() {
