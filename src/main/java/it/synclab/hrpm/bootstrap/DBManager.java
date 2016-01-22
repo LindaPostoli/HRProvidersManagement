@@ -19,14 +19,13 @@ public class DBManager {
 
 	private static ConnectionPool cp;
 
-	public DBManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public DBManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		cp = ConnectionPool.getInstance();
 	}
-	
-	
+
 	public static final void init()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+
 	}
 
 	public void insert(Entity obj) throws SQLException, NoSuchMethodException, SecurityException,
@@ -69,35 +68,19 @@ public class DBManager {
 			System.out.println(methodName);
 
 			Method method = pst.getClass().getDeclaredMethod(methodName, paramTypes);
-		
+
 			fields.get(i).setAccessible(true);
-			method.invoke(pst, i+1, fields.get(i).get(obj));
+			method.invoke(pst, i + 1, fields.get(i).get(obj));
 
 		}
-		
+
 		pst.executeUpdate();
 
-		
-	}
-	
-		
-	public void update(Entity obj) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-	
-		
 	}
 
-	public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SQLException, NoSuchMethodException, SecurityException, ParseException, InstantiationException, ClassNotFoundException {
-		
-		DBManager dbm=new DBManager();
-		Rating rating = new Rating(1,2,3,5);
-		JobWebsite jwb = new JobWebsite("www.indeed.com");
-		jwb.setName("Indeed");
-		dbm.insert(rating);
-		System.out.println("fatto");
-		dbm.insert(jwb);
-		System.out.println("fatto");
-		
+	public void update(Entity obj)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
 	}
 
 }
