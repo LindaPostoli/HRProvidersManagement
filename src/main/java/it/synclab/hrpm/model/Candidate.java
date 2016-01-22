@@ -106,7 +106,8 @@ public class Candidate implements Entity {
 	 * @throws ParseException
 	 */
 	public void setBirthDate(String birthDate) throws ParseException {
-		this.birthDate = CalendarUtil.toCalendar(birthDate);
+		if(RegExpUtil.checkDateFormat(birthDate))
+			this.birthDate = CalendarUtil.toCalendar(birthDate);
 	}
 
 	public String getBirthPlace() {
