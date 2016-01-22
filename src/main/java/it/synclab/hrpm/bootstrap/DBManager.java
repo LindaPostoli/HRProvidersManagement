@@ -5,11 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import it.synclab.hrpm.connectionPool.ConnectionPool;
 import it.synclab.hrpm.model.Entity;
 import it.synclab.hrpm.model.JobWebsite;
@@ -19,9 +19,14 @@ public class DBManager {
 
 	private static ConnectionPool cp;
 
+	public DBManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		cp = ConnectionPool.getInstance();
+	}
+	
+	
 	public static final void init()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		cp = ConnectionPool.getInstance();
+		
 	}
 
 	public void insert(Entity obj) throws SQLException, NoSuchMethodException, SecurityException,
@@ -63,22 +68,36 @@ public class DBManager {
 			Class<?>[] paramTypes = { int.class, fields.get(i).getType() };
 			System.out.println(methodName);
 
-			Method method = pst.getClass().getMethod(methodName, paramTypes);
-			method.invoke(pst, i + 1, fields.get(i).get(obj));
+			Method method = pst.getClass().getDeclaredMethod(methodName, paramTypes);
+		
+			fields.get(i).setAccessible(true);
+			method.invoke(pst, i+1, fields.get(i).get(obj));
 
 		}
+		
+		pst.executeUpdate();
 
-		System.out.println(query);
+		
+	}
+	
+		
+	public void update(Entity obj) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+		
 	}
 
 	public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SQLException, NoSuchMethodException, SecurityException, ParseException {
-		DBManager dbmanager = new DBManager();
-		Rating rating = new Rating(1, 5, 6, 6);
-
+			InvocationTargetException, SQLException, NoSuchMethodException, SecurityException, ParseException, InstantiationException, ClassNotFoundException {
+		
+		DBManager dbm=new DBManager();
+		Rating rating = new Rating(1,2,3,5);
 		JobWebsite jwb = new JobWebsite("www.indeed.com");
 		jwb.setName("Indeed");
-		dbmanager.insert(rating);
+		dbm.insert(rating);
+		System.out.println("fatto");
+		dbm.insert(jwb);
+		System.out.println("fatto");
+		
 	}
 
 }
