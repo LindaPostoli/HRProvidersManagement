@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import it.synclab.hrpm.core.Connection;
 import it.synclab.hrpm.enumeration.ConnectionCriteria;
+import it.synclab.hrpm.exception.FullConnectionPoolException;
 import it.synclab.hrpm.factory.ConnectionFactory;
 import it.synclab.hrpm.model.Entity;
 
@@ -15,7 +16,7 @@ public class PersistentService<T extends Entity> {
 		connection = ConnectionFactory.getInstance(criteria);
 	}
 
-	public void insert(T object) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException, InstantiationException, ClassNotFoundException{
+	public void insert(T object) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SQLException, InstantiationException, ClassNotFoundException, FullConnectionPoolException{
 		connection.insert(object);
 	}
 
