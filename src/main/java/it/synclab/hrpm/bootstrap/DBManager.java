@@ -120,9 +120,9 @@ public class DBManager {
 			method.invoke(pst, i + 1, fields.get(i).get(obj));
 
 		}
-		
+
 		pst.executeUpdate();
-		
+
 		
 	}
 	
@@ -139,6 +139,9 @@ public class DBManager {
 		rating.setGeneral(10);
 		dbm.update(rating);
 
+
 	}
+
+	
 
 }
