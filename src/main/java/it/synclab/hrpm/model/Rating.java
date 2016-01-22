@@ -22,6 +22,10 @@ public class Rating implements Entity {
 		this.id = Integer.parseInt(id);
 	}
 
+	public Rating(int id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -157,5 +161,4 @@ public class Rating implements Entity {
 		return String.valueOf(id);
 	}
 
-	
 }
