@@ -46,6 +46,7 @@ public class HRManagement {
 		fm.insert(r4);
 		r1.setGeneral(21);
 		fm.update(r1);
+		System.out.println(r1.toCSV());
 
 
 
@@ -62,8 +63,10 @@ public class HRManagement {
 		chs.insert(synclab);
 
 		Candidate candidate2 = new Candidate("hgjfsssjv", ChannelType.UNSOLICITED_APPLICATION);
+		
 
-		// bootstrap();
+		
+		 bootstrap();
 
 		
 
