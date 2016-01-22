@@ -5,14 +5,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.jdbc.JDBC42PreparedStatement;
+
 import it.synclab.hrpm.connectionPool.ConnectionPool;
+import it.synclab.hrpm.exception.FullConnectionPoolException;
 import it.synclab.hrpm.model.Entity;
-import it.synclab.hrpm.model.JobWebsite;
 import it.synclab.hrpm.model.Rating;
 
 public class DBManager {
@@ -29,7 +31,7 @@ public class DBManager {
 	}
 
 	public void insert(Entity obj) throws SQLException, NoSuchMethodException, SecurityException,
-			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException, FullConnectionPoolException {
 
 		Connection conn = (Connection) cp.getConnection();
 
@@ -63,9 +65,7 @@ public class DBManager {
 				methodName = "set" + fields.get(i).getType().getSimpleName();
 
 			Class<?>[] paramTypes = { int.class, fields.get(i).getType() };
-			System.out.println(methodName);
-
-			Method method = pst.getClass().getDeclaredMethod(methodName, paramTypes);
+			Method method = pst.getClass().getMethod(methodName, paramTypes);
 
 			fields.get(i).setAccessible(true);
 			method.invoke(pst, i + 1, fields.get(i).get(obj));
@@ -73,11 +73,13 @@ public class DBManager {
 		}
 
 		pst.executeUpdate();
+		cp.releaseConnection(conn);
 
 	}
 
 	public void update(Entity obj) throws InstantiationException, IllegalAccessException, ClassNotFoundException,
-			SQLException, NoSuchFieldException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+			SQLException, NoSuchFieldException, SecurityException, NoSuchMethodException, IllegalArgumentException,
+			InvocationTargetException, FullConnectionPoolException {
 
 		Connection conn = (Connection) cp.getConnection();
 		String query = "UPDATE " + obj.getClass().getSimpleName() + " SET ";
@@ -96,9 +98,9 @@ public class DBManager {
 		query += fields.get(fields.size() - 1).getName() + " = ? ";
 
 		query += " WHERE " + obj.getKeyName() + " = " + obj.getKey() + ";";
-		
+
 		PreparedStatement pst = conn.prepareStatement(query);
-		
+
 		for (int i = 0; i < fields.size(); i++) {
 
 			String methodName = null;
@@ -112,9 +114,8 @@ public class DBManager {
 				methodName = "set" + fields.get(i).getType().getSimpleName();
 
 			Class<?>[] paramTypes = { int.class, fields.get(i).getType() };
-			System.out.println(methodName);
 
-			Method method = pst.getClass().getDeclaredMethod(methodName, paramTypes);
+			Method method = pst.getClass().getMethod(methodName, paramTypes);
 
 			fields.get(i).setAccessible(true);
 			method.invoke(pst, i + 1, fields.get(i).get(obj));
@@ -122,26 +123,20 @@ public class DBManager {
 		}
 
 		pst.executeUpdate();
-
-		
-	}
-	
-	
-	
-
-	public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SQLException, NoSuchMethodException, SecurityException, ParseException,
-			InstantiationException, ClassNotFoundException, NoSuchFieldException {
-
-		DBManager dbm = new DBManager();
-		Rating rating = new Rating(31, 2, 3, 5);
-		dbm.insert(rating);
-		rating.setGeneral(10);
-		dbm.update(rating);
-
+		cp.releaseConnection(conn);
 
 	}
 
-	
+	public void delete(Entity obj) throws SQLException, FullConnectionPoolException {
+
+		Connection conn = (Connection) cp.getConnection();
+		String query = "DELETE FROM " + obj.getClass().getSimpleName() + " WHERE " + obj.getKeyName() + " = "
+				+ obj.getKey() + ";";
+
+		PreparedStatement pst = conn.prepareStatement(query);
+		pst.executeUpdate();
+		cp.releaseConnection(conn);
+
+	}
 
 }
