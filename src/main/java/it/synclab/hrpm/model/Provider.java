@@ -160,4 +160,8 @@ public class Provider implements Channel {//TODO change from Company to Provider
 		return name;
 	}
 
+	public String getKeyName() {
+		return "name";
+	}
+
 }

@@ -8,7 +8,7 @@ public class JobWebsite implements Channel {
 	public JobWebsite(String url) {
 		this.url = url;
 	}
-	
+
 	public JobWebsite() {
 		super();
 	}
@@ -75,5 +75,9 @@ public class JobWebsite implements Channel {
 
 	public String getKey() {
 		return url;
+	}
+
+	public String getKeyName() {
+		return "url";
 	}
 }
