@@ -5,30 +5,28 @@ import java.util.Calendar;
 
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.util.CalendarUtil;
+import it.synclab.hrpm.regex.RegExpUtil;
 
 public class Candidate implements Entity {
-	
+
 	private String taxCode;
 	private String name, surname;
 	private Calendar birthDate;
 	private String birthPlace;
 	private String address, zipCode, city, country;
 	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
-	
+
 	private Rating rating;
 	private ChannelType channelType;
-	
 
 	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL";
-	
-	
 
 	public Candidate(String taxCode) {
 		this.taxCode = taxCode;
 	}
-	
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, 
-			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating, 
+
+	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
+			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating,
 			ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.name = name;
@@ -44,8 +42,8 @@ public class Candidate implements Entity {
 		this.rating = rating;
 		this.channelType = channelType;
 	}
-	
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address, 
+
+	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
 			String zipCode, String city, String country, String phoneNumber, String eMail) {
 		this.taxCode = taxCode;
 		this.name = name;
@@ -58,46 +56,49 @@ public class Candidate implements Entity {
 		this.country = country;
 		this.phoneNumber = phoneNumber;
 		this.eMail = eMail;
-		
+
 	}
-	
+
 	public Candidate(String taxCode, ChannelType channelType) {
 		this.taxCode = taxCode;
 		this.channelType = channelType;
 	}
-	
+
 	public String getTaxCode() {
 		return taxCode;
 	}
-	
+
 	public void setTaxCode(String taxCode) {
-		this.taxCode = taxCode;
+		if (RegExpUtil.checkTaxCodeFormat(taxCode))
+			this.taxCode = taxCode;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
-		this.name = name;
+		if (RegExpUtil.checkNameFormat(name))
+			this.name = name;
 	}
-	
+
 	public String getSurname() {
 		return surname;
 	}
-	
+
 	public void setSurname(String surname) {
-		this.surname = surname;
+		if (RegExpUtil.checkSurnameFormat(surname))
+			this.surname = surname;
 	}
-	
+
 	public Calendar getBirthDate() {
 		return birthDate;
 	}
-	
+
 	public void setBirthDate(Calendar birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 	/**
 	 * 
 	 * @param birthDate
@@ -105,85 +106,93 @@ public class Candidate implements Entity {
 	 * @throws ParseException
 	 */
 	public void setBirthDate(String birthDate) throws ParseException {
-		this.birthDate = CalendarUtil.toCalendar(birthDate);
+		if(RegExpUtil.checkDateFormat(birthDate))
+			this.birthDate = CalendarUtil.toCalendar(birthDate);
 	}
-	
+
 	public String getBirthPlace() {
 		return birthPlace;
 	}
-	
+
 	public void setBirthPlace(String birthPlace) {
-		this.birthPlace = birthPlace;
+		if (RegExpUtil.checkBirthPlaceFormat(birthPlace))
+			this.birthPlace = birthPlace;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(String address) {
-		this.address = address;
+		if(RegExpUtil.checkAddressFormat(address))
+			this.address = address;
 	}
-	
+
 	public String getZipCode() {
 		return zipCode;
 	}
-	
+
 	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+		if(RegExpUtil.checkZipCodeFormat(zipCode))
+			this.zipCode = zipCode;
 	}
-	
+
 	public String getCity() {
 		return city;
 	}
-	
+
 	public void setCity(String city) {
-		this.city = city;
+		if(RegExpUtil.checkCityFormat(city))
+			this.city = city;
 	}
-	
+
 	public String getCountry() {
 		return country;
 	}
-	
+
 	public void setCountry(String country) {
-		this.country = country;
+		if(RegExpUtil.checkCountryFormat(country))
+			this.country = country;
 	}
-	
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	
+
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		if(RegExpUtil.checkPhoneNumberFormat(phoneNumber))
+			this.phoneNumber = phoneNumber;
 	}
-	
+
 	public String geteMail() {
 		return eMail;
 	}
-	
+
 	public void seteMail(String eMail) {
-		this.eMail = eMail;
+		if(RegExpUtil.checkEMmailFormat(eMail))
+			this.eMail = eMail;
 	}
-	
+
 	public Rating getRating() {
 		return rating;
 	}
-	
+
 	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
-	
+
 	public ChannelType getChannelType() {
 		return channelType;
 	}
-	
+
 	public void setChannelType(ChannelType channelType) {
 		this.channelType = channelType;
 	}
-	
+
 	public static String getHeader() {
 		return HEADER;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -203,7 +212,7 @@ public class Candidate implements Entity {
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -280,20 +289,20 @@ public class Candidate implements Entity {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + 
-				", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + 
-				", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating + 
-				", channel=" + channelType + "]";
+		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
+				+ ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
+				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating
+				+ ", channel=" + channelType + "]";
 	}
-	
+
 	public String toCSV() {
-		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" +
-					birthPlace + ";" + address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
+		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" + birthPlace + ";"
+				+ address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
 	}
-	
+
 	public String getKey() {
 		return taxCode;
 	}
