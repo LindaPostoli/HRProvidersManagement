@@ -66,44 +66,77 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public void delete(Entity obj) throws FileNotFoundException, IOException, ClassNotFoundException{
+
+	public void delete(Entity obj) throws FileNotFoundException, IOException, ClassNotFoundException {
 		final String nameFileSorg = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
 		final String nameFileDest = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + "Copy.csv";
-		
-		BufferedReader readerSorg= new BufferedReader(new FileReader(nameFileSorg));
+
+		BufferedReader readerSorg = new BufferedReader(new FileReader(nameFileSorg));
 		File fileDest = new File(nameFileDest);
-		FileWriter writerDest = new FileWriter(fileDest); 
-		
+		FileWriter writerDest = new FileWriter(fileDest);
+
 		ParserManager parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
-		
+
 		String line = "";
 		line = readerSorg.readLine();
-		while((line = readerSorg.readLine()) != null){
+		while ((line = readerSorg.readLine()) != null) {
 			try {
-				if(!(parserManager.parse(line).equals(obj)))
+				if (!(parserManager.parse(line).equals(obj)))
 					writerDest.write(line + "\n");
 			} catch (KeyNotFoundException e) {
 				e.toString();
 			}
 		}
 		writerDest.close();
-		
+
 		BufferedReader readerDest = new BufferedReader(new FileReader(fileDest));
 		FileWriter writerSorg = new FileWriter(nameFileSorg);
 		writerSorg.write(Rating.HEADER + "\n");
-		
-		while((line = readerDest.readLine()) != null)
+
+		while ((line = readerDest.readLine()) != null)
 			writerSorg.write(line + "\n");
-		
+
 		readerSorg.close();
 		readerDest.close();
 		writerSorg.close();
-		
+
+		fileDest.delete();
+	}
+
+	public void update(Entity obj) throws IOException, KeyNotFoundException {
+		final String nameFileSorg = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + ".csv";
+		final String nameFileDest = FileNameFactory.BASEPATH + obj.getClass().getSimpleName() + "Copy.csv";
+
+		BufferedReader readerSorg = new BufferedReader(new FileReader(nameFileSorg));
+		File fileDest = new File(nameFileDest);
+		FileWriter writerDest = new FileWriter(fileDest);
+
+		ParserManager parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
+		String line = "";
+		line = readerSorg.readLine();
+		while ((line = readerSorg.readLine()) != null) {
+			try {
+				if (!(parserManager.parse(line).equals(obj)))
+					writerDest.write(line + "\n");
+
+			} catch (KeyNotFoundException e) {
+				e.toString();
+			}
+		}
+		writerDest.write(obj.toCSV() + "\n");
+		writerDest.flush();
+		writerDest.close();
+
+		BufferedReader readerDest = new BufferedReader(new FileReader(fileDest));
+		FileWriter writerSorg = new FileWriter(nameFileSorg);
+		writerSorg.write(Rating.HEADER + "\n");
+
+		while ((line = readerDest.readLine()) != null)
+			writerSorg.write(line + "\n");
+
+		readerSorg.close();
+		readerDest.close();
+		writerSorg.close();
 		fileDest.delete();
 	}
 }
-
-
-

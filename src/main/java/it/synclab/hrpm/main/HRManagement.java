@@ -45,9 +45,8 @@ public class HRManagement {
 		fm.insert(r4);
 		
 		
-		fm.delete(r1);
-		fm.delete(r3);
-		
+		r1.setGeneral(21);
+		fm.update(r1);
 
 
 		CandidateService cs = new CandidateService(ConnectionCriteria.FILE);
