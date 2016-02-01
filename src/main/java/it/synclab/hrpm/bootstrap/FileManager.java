@@ -6,11 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import it.synclab.hrpm.enumeration.ChannelType;
-import it.synclab.hrpm.enumeration.ConnectionCriteria;
 import it.synclab.hrpm.exception.KeyNotFoundException;
 import it.synclab.hrpm.factory.ChannelFactory;
 import it.synclab.hrpm.factory.FileNameFactory;
@@ -19,7 +16,7 @@ import it.synclab.hrpm.model.Candidate;
 import it.synclab.hrpm.model.Channel;
 import it.synclab.hrpm.model.Entity;
 import it.synclab.hrpm.model.Rating;
-import it.synclab.hrpm.parser.*;
+import it.synclab.hrpm.parser.ParserManager;
 
 public class FileManager {
 
@@ -75,7 +72,7 @@ public class FileManager {
 		File fileDest = new File(nameFileDest);
 		FileWriter writerDest = new FileWriter(fileDest);
 
-		ParserManager parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
+		ParserManager<?> parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
 
 		String line = "";
 		line = readerSorg.readLine();
@@ -111,7 +108,7 @@ public class FileManager {
 		File fileDest = new File(nameFileDest);
 		FileWriter writerDest = new FileWriter(fileDest);
 
-		ParserManager parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
+		ParserManager<?> parserManager = ParserManagerFactory.getInstance(obj.getClass().getSimpleName());
 		String line = "";
 		line = readerSorg.readLine();
 		while ((line = readerSorg.readLine()) != null) {

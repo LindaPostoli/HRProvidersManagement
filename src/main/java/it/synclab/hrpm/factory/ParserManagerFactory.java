@@ -4,7 +4,7 @@ import it.synclab.hrpm.parser.*;
 
 public class ParserManagerFactory {
 
-	public static final ParserManager getInstance(String typeParser) {
+	public static final ParserManager<?> getInstance(String typeParser) {
 
 		if(typeParser.equalsIgnoreCase("candidate")) 
 			return new CandidateParser();
