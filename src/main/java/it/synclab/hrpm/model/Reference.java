@@ -144,4 +144,9 @@ public class Reference implements Channel {
 		return eMail;
 	}
 
+	
+	public String getKeyName() {
+		return "eMail";
+	}
+
 }

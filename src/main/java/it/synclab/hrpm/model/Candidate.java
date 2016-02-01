@@ -306,4 +306,8 @@ public class Candidate implements Entity {
 	public String getKey() {
 		return taxCode;
 	}
+	
+	public String getKeyName(){
+		return "taxCode";	
+	}
 }

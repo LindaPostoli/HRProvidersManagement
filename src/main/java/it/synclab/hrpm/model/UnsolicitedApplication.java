@@ -58,6 +58,11 @@ public class UnsolicitedApplication implements Channel {
 	public String getKey() {
 		return String.valueOf(id);
 	}
+
+	
+	public String getKeyName() {
+		return "id";
+	}
 	
 	
 }

@@ -176,4 +176,8 @@ public class University implements Channel {
 		return name;
 	}
 
+	public String getKeyName() {	
+		return "name";
+	}
+
 }

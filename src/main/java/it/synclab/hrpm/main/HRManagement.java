@@ -1,6 +1,7 @@
 package it.synclab.hrpm.main;
 
 import java.awt.Transparency;
+import java.beans.PersistenceDelegate;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -46,6 +47,7 @@ public class HRManagement {
 		fm.insert(r4);
 		r1.setGeneral(21);
 		fm.update(r1);
+		System.out.println(r1.toCSV());
 
 
 
@@ -62,9 +64,23 @@ public class HRManagement {
 		chs.insert(synclab);
 
 		Candidate candidate2 = new Candidate("hgjfsssjv", ChannelType.UNSOLICITED_APPLICATION);
+		
+		DBManager dbm = new DBManager();
+		Rating rating = new Rating(46, 2, 3, 5);
+		Rating rating1 = new Rating(47, 2, 3, 5);
+		PersistentService<Rating> ps=new PersistentService<>(ConnectionCriteria.DB);
+		ps.insert(rating);
+		ps.insert(rating1);
+		rating.setGeneral(10);
+		Rating ratingDel= new Rating(44, 2, 3, 5);
+		dbm.update(rating);
+		dbm.delete(ratingDel);
 
-		// bootstrap();
+		
+		 bootstrap();
 
+		 
+		 
 		
 
 	}

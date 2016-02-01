@@ -170,4 +170,10 @@ public class Stage implements Channel {
 		return String.valueOf(id);
 	}
 
+	
+	public String getKeyName() {
+		
+		return "id";
+	}
+
 }
