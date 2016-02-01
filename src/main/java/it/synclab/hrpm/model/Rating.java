@@ -1,61 +1,41 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+
+@Entity
 public class Rating{
 
-	private int id;
+	private long id;
 	private int professionality;
 	private int personality;
 	private int general;
 	private String note;
+	
+	@OneToOne 
+	private Candidate candidate;
 
-	public static final String HEADER = "ID;PROFESSIONAL_IMPRESSIONS;PERSONALITY_IMPRESSIONS;GENERAL;NOTE";
-	// TODO: insert attributo per il numero di colloqui (se più di uno)
-
-	public Rating(int id, int professionality, int personality, int mark) {
-		this.id = id;
-		this.professionality = professionality;
-		this.personality = personality;
-		this.general = mark;
+	public Rating() {
+		
 	}
 
-	public Rating(String id) {
-		this.id = Integer.parseInt(id);
-	}
-
-	public Rating(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
+	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(name = "RATING_ID", unique = true, nullable = false)
+	public long getId() {
 		return id;
 	}
 
-	/**
-	 * 
-	 * @param id
-	 *            as Integer format
-	 * 
-	 */
-	public void setId(String id) {
-		this.id = Integer.parseInt(id);
-	}
-
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
 	public int getProfessionality() {
 		return professionality;
-	}
-
-	/**
-	 * 
-	 * @param Professional
-	 *            as Integer format
-	 * 
-	 */
-	public void setProfessionality(String professionality) {
-		this.professionality = Integer.parseInt(professionality);
 	}
 
 	public void setProfessionality(int professionality) {
@@ -66,32 +46,12 @@ public class Rating{
 		return personality;
 	}
 
-	/**
-	 * 
-	 * @param personality
-	 *            as Integer format
-	 * 
-	 */
-	public void setPersonality(String personality) {
-		this.personality = Integer.parseInt(personality);
-	}
-
 	public void setPersonality(int personality) {
 		this.personality = personality;
 	}
 
 	public int getGeneral() {
 		return general;
-	}
-
-	/**
-	 * 
-	 * @param mark
-	 *            as Integer format
-	 * 
-	 */
-	public void setGeneral(String general) {
-		this.general = Integer.parseInt(general);
 	}
 
 	public void setGeneral(int general) {
@@ -106,25 +66,11 @@ public class Rating{
 		this.note = note;
 	}
 
-	public static String getHeader() {
-		return HEADER;
-	}
-
-	@Override
-	public String toString() {
-		return "Rating [id=" + id + ", professionality=" + professionality + ", personality=" + personality
-				+ ", general=" + general + ", note=" + note + "]";
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + general;
-		result = prime * result + id;
-		result = prime * result + ((note == null) ? 0 : note.hashCode());
-		result = prime * result + personality;
-		result = prime * result + professionality;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -137,33 +83,19 @@ public class Rating{
 		if (getClass() != obj.getClass())
 			return false;
 		Rating other = (Rating) obj;
-		if (general != other.general)
-			return false;
 		if (id != other.id)
-			return false;
-		if (note == null) {
-			if (other.note != null)
-				return false;
-		} else if (!note.equals(other.note))
-			return false;
-		if (personality != other.personality)
-			return false;
-		if (professionality != other.professionality)
 			return false;
 		return true;
 	}
 
-	public String toCSV() {
-		return id + ";" + professionality + ";" + personality + ";" + general + ";" + note + ";";
+	@Override
+	public String toString() {
+		return "Rating [id=" + id + ", professionality=" + professionality + ", personality=" + personality
+				+ ", general=" + general + ", note=" + note + "]";
 	}
+	
+	
 
-	public String getKey() {
-		return String.valueOf(id);
-	}
-
-
-	public String getKeyName() {
-		return "id";
-	}
-
+	
+	
 }

@@ -1,8 +1,23 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="UNSOLICITED_APP")
 public class UnsolicitedApplication implements Channel {
 
-	private int id;
+	private long id;
+	
+	@OneToOne
+	@JoinColumn(name="CANDIDATE_ID")
+	  private Candidate candidate;
 				
 	public UnsolicitedApplication() {
 		super();
@@ -12,23 +27,22 @@ public class UnsolicitedApplication implements Channel {
 		this.id = Integer.parseInt(id);
 	}
 		
-	public int getId() {
+	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(name = "UNSOLICITED_APP_ID", unique = true, nullable = false)
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getHeader() {
-		return null;
-	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -48,21 +62,9 @@ public class UnsolicitedApplication implements Channel {
 	
 	@Override
 	public String toString() {
-		return "UnsolicitedApplication [id=" + id + "]";
+		return "UnsolicitedApplication [id=" + id + ", candidate=" + candidate + "]";
 	}
 
-	public String toCSV() {
-		return id + "Unsolicited Application" + ";";
-	}
-	
-	public String getKey() {
-		return String.valueOf(id);
-	}
-
-	
-	public String getKeyName() {
-		return "id";
-	}
 	
 	
 }

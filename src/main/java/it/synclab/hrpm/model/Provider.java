@@ -1,27 +1,44 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PROVIDER")
 public class Provider implements Channel {
 
-	private String name, address, zipCode, city, country, phoneNumber, eMail;
-	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;E-MAIL";
+	private String eMail;
+	private String name;
+	private String address;
+	private String zipCode;
+	private String city;
+	private String country;
+	private String phoneNumber;
 
-	public Provider(String name, String address, String zipCode, String city, String country, String phoneNumber,
-			String eMail) {
-		this.name = name;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	private Candidate candidate;
+
+	public Provider(String eMail) {
 		this.eMail = eMail;
 	}
-	
-	public Provider(String name) {
-		this.name = name;
-	}
-	
+
 	public Provider() {
 		super();
+	}
+	
+	@Id
+	@Column(name = "PROVIDER_ID", unique = true, nullable = false)
+	public String getEMail() {
+		return eMail;
+	}
+
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
 	}
 
 	public String getName() {
@@ -72,29 +89,11 @@ public class Provider implements Channel {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
-	public String getHeader() {
-		return HEADER;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
@@ -107,61 +106,21 @@ public class Provider implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		Provider other = (Provider) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
 		if (eMail == null) {
 			if (other.eMail != null)
 				return false;
 		} else if (!eMail.equals(other.eMail))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Provider [name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
-				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + "]";
+		return "Provider [eMail=" + eMail + ", name=" + name + ", address=" + address + ", zipCode=" + zipCode
+				+ ", city=" + city + ", country=" + country + ", phoneNumber=" + phoneNumber + ", candidate="
+				+ candidate + "]";
 	}
-
-	public String toCSV() {
-		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
-	}
-
-	public String getKey() {
-
-		return name;
-	}
-
-	public String getKeyName() {
-		return "name";
-	}
+	
+	
 
 }
