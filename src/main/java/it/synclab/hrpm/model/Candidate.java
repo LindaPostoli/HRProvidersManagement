@@ -2,12 +2,11 @@ package it.synclab.hrpm.model;
 
 import java.text.ParseException;
 import java.util.Calendar;
-
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.util.CalendarUtil;
 import it.synclab.hrpm.regex.RegExpUtil;
 
-public class Candidate implements Entity {
+public class Candidate {
 
 	private String taxCode;
 	private String name, surname;

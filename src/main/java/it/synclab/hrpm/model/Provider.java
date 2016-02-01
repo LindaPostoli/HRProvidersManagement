@@ -1,6 +1,6 @@
 package it.synclab.hrpm.model;
 
-public class Provider implements Channel {//TODO change from Company to Provider
+public class Provider implements Channel {
 
 	private String name, address, zipCode, city, country, phoneNumber, eMail;
 	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;E-MAIL";
