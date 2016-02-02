@@ -4,11 +4,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="REFERENCE")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllReference", query = "select r from Reference r"),
+		@NamedQuery(name = "getReference", query = "select r from Reference r where r.eMail = :eMail"),
+		@NamedQuery(name = "getBySurnameReference", query = "select r from Reference r where r.surname = :surname"),
+		@NamedQuery(name = "getByReferenceCompanyReference", query = "select r from Reference r where r.referenceCompany = :referenceCompany"),
+		@NamedQuery(name = "deleteAllReference", query = "delete from Reference r"),
+		@NamedQuery(name = "deleteReference", query = "delete r from Reference r")
+		})
+
 public class Reference implements Channel {
 
 	private String name;
