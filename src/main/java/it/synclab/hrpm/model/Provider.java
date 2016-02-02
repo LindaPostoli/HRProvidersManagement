@@ -4,11 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "PROVIDER")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllProvider", query = "select p from Provider p"),
+		@NamedQuery(name = "getProvider", query = "select p from Provider p where p.eMail = :eMail"),
+		@NamedQuery(name = "getByCandidateJobWebsite", query = "select p from Provider p where p.candidate.eMail = :eMail"),
+		@NamedQuery(name = "getByCityProvider", query = "select p from Provider p where p.city = :city"),
+		@NamedQuery(name = "getByNameProvider", query = "select p from Provider p where p.name = :name"),
+		@NamedQuery(name = "deleteProvider", query = "select p from Provider p where p.eMail = :eMail"),
+		@NamedQuery(name = "deleteAllProvider", query = "delete from Provider p") })
 public class Provider implements Channel {
 
 	private String eMail;

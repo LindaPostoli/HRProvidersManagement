@@ -5,10 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 
 @Entity
+@Table(name = "RATINGS")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllRating", query = "select r from Rating r"),
+		@NamedQuery(name = "getRating", query = "select r from Rating where r.candidate.eMail = :eMail"),
+		@NamedQuery(name = "getByGeneralRating", query = "select r from Rating r where r.general > :general order by r.general"),
+		@NamedQuery(name = "deleteRating", query = "delete r from Rating r where r.candidate.eMail = :eMail"),
+		@NamedQuery(name = "deleteAllRating", query = "delete from Rating r") })
 public class Rating{
 
 	private long id;

@@ -4,11 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "JOB_WEBSITE")
+@XmlRootElement
+@NamedQueries({ @NamedQuery(name = "getAllJobWebsite", query = "select j from JobWebsite j"),
+		@NamedQuery(name = "getJobWebsite", query = "select j from JobWebsite where j.url = :url "),
+		@NamedQuery(name = "getByCandidateJobWebsite", query = "select j from JobWebsite where j.candidate.eMail = :eMail"),
+		@NamedQuery(name = "getByNameJobWebsite", query = "select j from JobWebsite where j.url = :url order by j.name asc"),
+		@NamedQuery(name = "deleteJobWebsite", query = "select j from JobWebsite j where j.url = :url"),
+		@NamedQuery(name = "deleteAllJobWebsite", query = "delete from JobWebsite j") })
 public class JobWebsite implements Channel {
 
 	private String url;

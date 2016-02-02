@@ -6,16 +6,28 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.util.CalendarUtil;
 import it.synclab.hrpm.regex.RegExpUtil;
 
 @Entity
-@Table(name = "CANDIDATE")
+@Table(name = "CANDIDATES")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllCandidate", query = "select c from Candidate c"),
+		@NamedQuery(name = "getCandidate", query = "select c from Candidate c where c.eMail = :eMail order by c.rating.general asc"),
+		@NamedQuery(name = "getByRatingCandidate", query = "select c.rating.general from Candidate c where c.rating.general > :general"),
+		@NamedQuery(name = "getByCityCandidate", query = "select c from Candidate c order by c.city"),
+		@NamedQuery(name = "getAllRatingCandidate", query = "select c from Candidate c where c.rating is not null"),
+		@NamedQuery(name = "deleteCandidate", query = "delete c from Candidate c where c.eMail = :eMail"),
+		@NamedQuery(name = "deleteAllCandidate", query = "delete from Candidate c") })
 public class Candidate {
 
 	private String eMail;
