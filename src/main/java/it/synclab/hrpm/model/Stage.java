@@ -9,13 +9,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import it.synclab.hrpm.util.CalendarUtil;
 
 @Entity
 @Table(name = "STAGE")
+@XmlRootElement
+@NamedQueries({
+	@NamedQuery(name = "getAllStage", query = "select s from Stage s"),
+	@NamedQuery(name = "getStage", query = "select s from Stage s where s.id = :id"),
+	@NamedQuery(name = "getByTitleStage", query = "select s from Stage s where s.title = :title"),
+	@NamedQuery(name = "getByTutorStage", query = "select s from Stage s where s.tutor = :tutor"),
+	@NamedQuery(name = "deleteAllStage", query = "delete from Stage s"),
+	@NamedQuery(name = "deleteStage", query = "delete s from Stage s")
+	})
 public class Stage implements Channel {
 
 	private long id;

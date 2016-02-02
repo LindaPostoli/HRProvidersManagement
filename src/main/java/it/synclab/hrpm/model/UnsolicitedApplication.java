@@ -6,11 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="UNSOLICITED_APP")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllUnsolicitedApplication", query = "select u from UnsolicitedApplication u"),
+		@NamedQuery(name = "getUnsolicitedApplication", query = "select u from UnsolicitedApplication u where u.id = :id"),
+		@NamedQuery(name = "deleteAllUnsolicitedApplication", query = "delete from UnsolicitedApplication u"),
+		@NamedQuery(name = "deleteUnsolicitedApplication", query = "delete u from UnsolicitedApplication u") })
 public class UnsolicitedApplication implements Channel {
 
 	private long id;
@@ -20,7 +29,6 @@ public class UnsolicitedApplication implements Channel {
 	  private Candidate candidate;
 				
 	public UnsolicitedApplication() {
-		super();
 	}
 	
 	public UnsolicitedApplication(String id){

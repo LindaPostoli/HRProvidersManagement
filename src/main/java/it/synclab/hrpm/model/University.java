@@ -4,11 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "UNIVERSITY")
+@XmlRootElement
+@NamedQueries({
+	@NamedQuery(name = "getAllUniversity", query = "select u from University u"),
+	@NamedQuery(name = "getUniversity", query = "select u from University u where u.eMail = :eMail"),
+	@NamedQuery(name = "getByNameUniversity", query = "select u from University u where u.name = :name"),
+	@NamedQuery(name = "getByCityUniversity", query = "select u from University u where u.city = :city"),
+	@NamedQuery(name = "getByFieldOfStudyUniversity", query = "select u from University u where u.fieldOfStudy = :fieldOfStudy"),
+	@NamedQuery(name = "deleteAllUniversity", query = "delete from University u"),
+	@NamedQuery(name = "deleteUniversity", query = "delete u from University u") })
 public class University implements Channel {
 
 	private String name;
