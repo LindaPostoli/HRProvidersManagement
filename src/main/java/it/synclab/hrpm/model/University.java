@@ -1,21 +1,40 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@Table(name = "UNIVERSITY")
+@XmlRootElement
+@NamedQueries({
+	@NamedQuery(name = "getAllUniversity", query = "select u from University u"),
+	@NamedQuery(name = "getUniversity", query = "select u from University u where u.eMail = :eMail"),
+	@NamedQuery(name = "getByNameUniversity", query = "select u from University u where u.name = :name"),
+	@NamedQuery(name = "getByCityUniversity", query = "select u from University u where u.city = :city"),
+	@NamedQuery(name = "getByFieldOfStudyUniversity", query = "select u from University u where u.fieldOfStudy = :fieldOfStudy"),
+	@NamedQuery(name = "deleteAllUniversity", query = "delete from University u"),
+	@NamedQuery(name = "deleteUniversity", query = "delete u from University u") })
 public class University implements Channel {
 
-	private String name, address, zipCode, city, country, phoneNumber, eMail, fieldOfStudy;
-	private static final String HEADER = "NAME;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL;FIELD_OF_STUDY";
+	private String name;
+	private String address;
+	private String zipCode;
+	private String city;
+	private String country;
+	private String phoneNumber;
+	private String eMail;
+	private String fieldOfStudy;
 
-	public University(String name, String address, String zipCode, String city, String country, String phoneNumber,
-			String eMail, String fieldOfStudy) {
-		this.name = name;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
-		this.eMail = eMail;
-		this.fieldOfStudy = fieldOfStudy;
-	}
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	private Candidate candidate;
 
 	public University(String name) {
 		this.name = name;
@@ -25,6 +44,8 @@ public class University implements Channel {
 		super();
 	}
 
+	@Id
+	@Column(name = "UNIVERSITY_ID", unique = true, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -89,22 +110,11 @@ public class University implements Channel {
 		this.fieldOfStudy = fieldOfStudy;
 	}
 
-	public String getHeader() {
-		return HEADER;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
-		result = prime * result + ((fieldOfStudy == null) ? 0 : fieldOfStudy.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
@@ -117,45 +127,10 @@ public class University implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		University other = (University) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
-		if (eMail == null) {
-			if (other.eMail != null)
-				return false;
-		} else if (!eMail.equals(other.eMail))
-			return false;
-		if (fieldOfStudy == null) {
-			if (other.fieldOfStudy != null)
-				return false;
-		} else if (!fieldOfStudy.equals(other.fieldOfStudy))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
 	}
@@ -164,20 +139,7 @@ public class University implements Channel {
 	public String toString() {
 		return "University [name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
 				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", fieldOfStudy="
-				+ fieldOfStudy + "]";
-	}
-
-	public String toCSV() {
-		return name + ";" + address + ";" + zipCode + ";" + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";"
-				+ fieldOfStudy + ";";
-	}
-
-	public String getKey() {
-		return name;
-	}
-
-	public String getKeyName() {	
-		return "name";
+				+ fieldOfStudy + ", candidate=" + candidate + "]";
 	}
 
 }

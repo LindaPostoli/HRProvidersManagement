@@ -1,5 +1,5 @@
 package it.synclab.hrpm.model;
 
-public interface Channel extends Entity {
-	public String getHeader();
+public interface Channel{
+	
 }

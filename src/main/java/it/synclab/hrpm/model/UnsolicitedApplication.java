@@ -1,34 +1,56 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@Table(name="UNSOLICITED_APP")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllUnsolicitedApplication", query = "select u from UnsolicitedApplication u"),
+		@NamedQuery(name = "getUnsolicitedApplication", query = "select u from UnsolicitedApplication u where u.id = :id"),
+		@NamedQuery(name = "deleteAllUnsolicitedApplication", query = "delete from UnsolicitedApplication u"),
+		@NamedQuery(name = "deleteUnsolicitedApplication", query = "delete u from UnsolicitedApplication u") })
 public class UnsolicitedApplication implements Channel {
 
-	private int id;
+	private long id;
+	
+	@OneToOne
+	@JoinColumn(name="CANDIDATE_ID")
+	  private Candidate candidate;
 				
 	public UnsolicitedApplication() {
-		super();
 	}
 	
 	public UnsolicitedApplication(String id){
 		this.id = Integer.parseInt(id);
 	}
 		
-	public int getId() {
+	@Id @GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(name = "UNSOLICITED_APP_ID", unique = true, nullable = false)
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getHeader() {
-		return null;
-	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -48,21 +70,9 @@ public class UnsolicitedApplication implements Channel {
 	
 	@Override
 	public String toString() {
-		return "UnsolicitedApplication [id=" + id + "]";
+		return "UnsolicitedApplication [id=" + id + ", candidate=" + candidate + "]";
 	}
 
-	public String toCSV() {
-		return id + "Unsolicited Application" + ";";
-	}
-	
-	public String getKey() {
-		return String.valueOf(id);
-	}
-
-	
-	public String getKeyName() {
-		return "id";
-	}
 	
 	
 }

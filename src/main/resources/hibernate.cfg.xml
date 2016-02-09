@@ -18,6 +18,18 @@
 		<!-- <property name="show_sql">true</property> -->
 		<property name="generate_statistics">true</property>
 		<property name="hbm2ddl.auto">create</property>
+		
+		<!-- Mapping files -->
+        <mapping class="it.synclab.hrpm.Candidate" />
+		<mapping class="it.synclab.hrpm.Channel" />
+		<mapping class="it.synclab.hrpm.JobWebsite" />
+		<mapping class="it.synclab.hrpm.Provider" />
+		<mapping class="it.synclab.hrpm.Rating" />
+		<mapping class="it.synclab.hrpm.Reference" />
+		<mapping class="it.synclab.hrpm.Stage" />
+		<mapping class="it.synclab.hrpm.University" />
+		<mapping class="it.synclab.hrpm.UnsolicitedApplication" />
+		
 
 	</session-factory>
 </hibernate-configuration>

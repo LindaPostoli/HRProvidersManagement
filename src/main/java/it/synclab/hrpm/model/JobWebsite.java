@@ -1,9 +1,31 @@
 package it.synclab.hrpm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@Table(name = "JOB_WEBSITE")
+@XmlRootElement
+@NamedQueries({ @NamedQuery(name = "getAllJobWebsite", query = "select j from JobWebsite j"),
+		@NamedQuery(name = "getJobWebsite", query = "select j from JobWebsite where j.url = :url "),
+		@NamedQuery(name = "getByCandidateJobWebsite", query = "select j from JobWebsite where j.candidate.eMail = :eMail"),
+		@NamedQuery(name = "getByNameJobWebsite", query = "select j from JobWebsite where j.url = :url order by j.name asc"),
+		@NamedQuery(name = "deleteJobWebsite", query = "select j from JobWebsite j where j.url = :url"),
+		@NamedQuery(name = "deleteAllJobWebsite", query = "delete from JobWebsite j") })
 public class JobWebsite implements Channel {
 
-	private String url, name;
-	private static final String HEADER = "URL;NAME";
+	private String url;
+	private String name;
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	private Candidate candidate;
 
 	public JobWebsite(String url) {
 		this.url = url;
@@ -11,6 +33,16 @@ public class JobWebsite implements Channel {
 
 	public JobWebsite() {
 		super();
+	}
+
+	@Id
+	@Column(name = "JOB_WEBSITE_ID", unique = true, nullable = false)
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getName() {
@@ -21,23 +53,10 @@ public class JobWebsite implements Channel {
 		this.name = name;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getHeader() {
-		return HEADER;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
@@ -51,11 +70,6 @@ public class JobWebsite implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		JobWebsite other = (JobWebsite) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (url == null) {
 			if (other.url != null)
 				return false;
@@ -66,18 +80,7 @@ public class JobWebsite implements Channel {
 
 	@Override
 	public String toString() {
-		return "JobWebsite [name=" + name + ", url=" + url + "]";
+		return "JobWebsite [url=" + url + ", name=" + name + ", candidate=" + candidate + "]";
 	}
 
-	public String toCSV() {
-		return url + ";" + name + ";";
-	}
-
-	public String getKey() {
-		return url;
-	}
-
-	public String getKeyName() {
-		return "url";
-	}
 }

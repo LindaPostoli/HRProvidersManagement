@@ -3,65 +3,68 @@ package it.synclab.hrpm.model;
 import java.text.ParseException;
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.util.CalendarUtil;
 import it.synclab.hrpm.regex.RegExpUtil;
 
-public class Candidate implements Entity {
+@Entity
+@Table(name = "CANDIDATES")
+@XmlRootElement
+@NamedQueries({
+		@NamedQuery(name = "getAllCandidate", query = "select c from Candidate c"),
+		@NamedQuery(name = "getCandidate", query = "select c from Candidate c where c.eMail = :eMail order by c.rating.general asc"),
+		@NamedQuery(name = "getByRatingCandidate", query = "select c.rating.general from Candidate c where c.rating.general > :general"),
+		@NamedQuery(name = "getByCityCandidate", query = "select c from Candidate c order by c.city"),
+		@NamedQuery(name = "getAllRatingCandidate", query = "select c from Candidate c where c.rating is not null"),
+		@NamedQuery(name = "deleteCandidate", query = "delete c from Candidate c where c.eMail = :eMail"),
+		@NamedQuery(name = "deleteAllCandidate", query = "delete from Candidate c") })
+public class Candidate {
 
+	private String eMail;
 	private String taxCode;
-	private String name, surname;
-	private Calendar birthDate;
-	private String birthPlace;
-	private String address, zipCode, city, country;
-	private String phoneNumber, eMail; // TODO: control phoneNumber.length()=10
+	private String name;
+	private String surname;
+	private Calendar birthDate;//Annotation data
+	private String birthPlace;//Annotation data
+	private String address;
+	private String zipCode;
+	private String city;
+	private String country;
+	private String phoneNumber;
 
+	@OneToOne
 	private Rating rating;
-	private ChannelType channelType;
 
-	public static final String HEADER = "TAX_CODE;NAME;SURNAME;BIRTH_DATE;BIRTH_PLACE;ADDRESS;ZIP_CODE;CITY;COUNTRY;PHONE_NUMBER;EMAIL";
+	@OneToOne(mappedBy = "candidate")
+	private Channel channel;
 
-	public Candidate(String taxCode) {
-		this.taxCode = taxCode;
+	public Candidate() {
+
 	}
 
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
-			String zipCode, String city, String country, String phoneNumber, String eMail, Rating rating,
-			ChannelType channelType) {
-		this.taxCode = taxCode;
-		this.name = name;
-		this.surname = surname;
-		this.birthDate = birthDate;
-		this.birthPlace = birthPlace;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
+	public Candidate(String eMail) {
 		this.eMail = eMail;
-		this.rating = rating;
-		this.channelType = channelType;
 	}
 
-	public Candidate(String taxCode, String name, String surname, Calendar birthDate, String birthPlace, String address,
-			String zipCode, String city, String country, String phoneNumber, String eMail) {
-		this.taxCode = taxCode;
-		this.name = name;
-		this.surname = surname;
-		this.birthDate = birthDate;
-		this.birthPlace = birthPlace;
-		this.address = address;
-		this.zipCode = zipCode;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
-		this.eMail = eMail;
-
+	@Id
+	@Column(name = "CANDIDATE_ID", unique = true, nullable = false)
+	public String getEMail() {
+		return eMail;
 	}
 
-	public Candidate(String taxCode, ChannelType channelType) {
-		this.taxCode = taxCode;
-		this.channelType = channelType;
+	public void setEMail(String eMail) {
+		if (RegExpUtil.checkEMmailFormat(eMail))
+			this.eMail = eMail;
 	}
 
 	public String getTaxCode() {
@@ -106,7 +109,7 @@ public class Candidate implements Entity {
 	 * @throws ParseException
 	 */
 	public void setBirthDate(String birthDate) throws ParseException {
-		if(RegExpUtil.checkDateFormat(birthDate))
+		if (RegExpUtil.checkDateFormat(birthDate))
 			this.birthDate = CalendarUtil.toCalendar(birthDate);
 	}
 
@@ -124,7 +127,7 @@ public class Candidate implements Entity {
 	}
 
 	public void setAddress(String address) {
-		if(RegExpUtil.checkAddressFormat(address))
+		if (RegExpUtil.checkAddressFormat(address))
 			this.address = address;
 	}
 
@@ -133,7 +136,7 @@ public class Candidate implements Entity {
 	}
 
 	public void setZipCode(String zipCode) {
-		if(RegExpUtil.checkZipCodeFormat(zipCode))
+		if (RegExpUtil.checkZipCodeFormat(zipCode))
 			this.zipCode = zipCode;
 	}
 
@@ -142,7 +145,7 @@ public class Candidate implements Entity {
 	}
 
 	public void setCity(String city) {
-		if(RegExpUtil.checkCityFormat(city))
+		if (RegExpUtil.checkCityFormat(city))
 			this.city = city;
 	}
 
@@ -151,7 +154,7 @@ public class Candidate implements Entity {
 	}
 
 	public void setCountry(String country) {
-		if(RegExpUtil.checkCountryFormat(country))
+		if (RegExpUtil.checkCountryFormat(country))
 			this.country = country;
 	}
 
@@ -160,17 +163,8 @@ public class Candidate implements Entity {
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		if(RegExpUtil.checkPhoneNumberFormat(phoneNumber))
+		if (RegExpUtil.checkPhoneNumberFormat(phoneNumber))
 			this.phoneNumber = phoneNumber;
-	}
-
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		if(RegExpUtil.checkEMmailFormat(eMail))
-			this.eMail = eMail;
 	}
 
 	public Rating getRating() {
@@ -181,35 +175,11 @@ public class Candidate implements Entity {
 		this.rating = rating;
 	}
 
-	public ChannelType getChannelType() {
-		return channelType;
-	}
-
-	public void setChannelType(ChannelType channelType) {
-		this.channelType = channelType;
-	}
-
-	public static String getHeader() {
-		return HEADER;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
-		result = prime * result + ((birthPlace == null) ? 0 : birthPlace.hashCode());
-		result = prime * result + ((channelType == null) ? 0 : channelType.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-		result = prime * result + ((taxCode == null) ? 0 : taxCode.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 
@@ -222,92 +192,20 @@ public class Candidate implements Entity {
 		if (getClass() != obj.getClass())
 			return false;
 		Candidate other = (Candidate) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (birthDate == null) {
-			if (other.birthDate != null)
-				return false;
-		} else if (!birthDate.equals(other.birthDate))
-			return false;
-		if (birthPlace == null) {
-			if (other.birthPlace != null)
-				return false;
-		} else if (!birthPlace.equals(other.birthPlace))
-			return false;
-		if (channelType == null) {
-			if (other.channelType != null)
-				return false;
-		} else if (!channelType.equals(other.channelType))
-			return false;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
 		if (eMail == null) {
 			if (other.eMail != null)
 				return false;
 		} else if (!eMail.equals(other.eMail))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (rating == null) {
-			if (other.rating != null)
-				return false;
-		} else if (!rating.equals(other.rating))
-			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
-			return false;
-		if (taxCode == null) {
-			if (other.taxCode != null)
-				return false;
-		} else if (!taxCode.equals(other.taxCode))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Candidate [taxCode=" + taxCode + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
-				+ ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city
-				+ ", country=" + country + ", phoneNumber=" + phoneNumber + ", eMail=" + eMail + ", rating=" + rating
-				+ ", channel=" + channelType + "]";
+		return "Candidate [eMail=" + eMail + ", taxCode=" + taxCode + ", name=" + name + ", surname=" + surname
+				+ ", birthDate=" + birthDate + ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode="
+				+ zipCode + ", city=" + city + ", country=" + country + ", phoneNumber=" + phoneNumber + ", rating="
+				+ rating + ", channel=" + channel + "]";
 	}
 
-	public String toCSV() {
-		return taxCode + ";" + name + ";" + surname + ";" + CalendarUtil.toString(birthDate) + ";" + birthPlace + ";"
-				+ address + ";" + zipCode + city + ";" + country + ";" + phoneNumber + ";" + eMail + ";";
-	}
-
-	public String getKey() {
-		return taxCode;
-	}
-	
-	public String getKeyName(){
-		return "taxCode";	
-	}
 }

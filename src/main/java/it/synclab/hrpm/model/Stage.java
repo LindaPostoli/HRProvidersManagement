@@ -3,54 +3,56 @@ package it.synclab.hrpm.model;
 import java.text.ParseException;
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import it.synclab.hrpm.util.CalendarUtil;
 
+@Entity
+@Table(name = "STAGE")
+@XmlRootElement
+@NamedQueries({
+	@NamedQuery(name = "getAllStage", query = "select s from Stage s"),
+	@NamedQuery(name = "getStage", query = "select s from Stage s where s.id = :id"),
+	@NamedQuery(name = "getByTitleStage", query = "select s from Stage s where s.title = :title"),
+	@NamedQuery(name = "getByTutorStage", query = "select s from Stage s where s.tutor = :tutor"),
+	@NamedQuery(name = "deleteAllStage", query = "delete from Stage s"),
+	@NamedQuery(name = "deleteStage", query = "delete s from Stage s")
+	})
 public class Stage implements Channel {
 
-	private int id;
-	private String title, tutor;
-	private Calendar fromDate, toDate;
-	private static final String HEADER = "ID;TITLE;TUTOR;FROM_DATE;TO_DATE";
+	private long id;
+	private String title;
+	private String tutor;
+	private Calendar fromDate;
+	private Calendar toDate;
 
-	public Stage(int id, String title, String tutor, Calendar fromDate, Calendar toDate) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.tutor = tutor;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-	}
-	
-	/**
-	 * 
-	 * @param id
-	 *            as Integer format
-	 *            
-	 */
-	public Stage(String id) {
-		this.id = Integer.parseInt(id);
-	}
-	
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	private Candidate candidate;
+
 	public Stage() {
 		super();
 	}
-	
-	public int getId(){
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "STAGER_ID", unique = true, nullable = false)
+	public long getId() {
 		return id;
 	}
-	
-	public void setId(int id){
+
+	public void setId(long id) {
 		this.id = id;
-	}
-	
-	/**
-	 * 
-	 * @param id
-	 *            as Integer format
-	 *            
-	 */
-	public void setId(String id) {
-		this.id = Integer.parseInt(id);
 	}
 
 	public String getTitle() {
@@ -76,7 +78,7 @@ public class Stage implements Channel {
 	public void setFromDate(Calendar fromDate) {
 		this.fromDate = fromDate;
 	}
-	
+
 	/**
 	 * 
 	 * @param fromDate
@@ -86,7 +88,7 @@ public class Stage implements Channel {
 	public void setFromDate(String toDate) throws ParseException {
 		this.toDate = CalendarUtil.toCalendar(toDate);
 	}
-	
+
 	public Calendar getToDate() {
 		return toDate;
 	}
@@ -94,7 +96,7 @@ public class Stage implements Channel {
 	public void setToDate(Calendar toDate) {
 		this.toDate = toDate;
 	}
-	
+
 	/**
 	 * 
 	 * @param toDate
@@ -104,23 +106,15 @@ public class Stage implements Channel {
 	public void setToDate(String toDate) throws ParseException {
 		this.toDate = CalendarUtil.toCalendar(toDate);
 	}
-	
-	public String getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
-		result = prime * result + ((tutor == null) ? 0 : tutor.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -130,50 +124,15 @@ public class Stage implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		Stage other = (Stage) obj;
-		if (fromDate == null) {
-			if (other.fromDate != null)
-				return false;
-		} else if (!fromDate.equals(other.fromDate))
-			return false;
 		if (id != other.id)
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		if (toDate == null) {
-			if (other.toDate != null)
-				return false;
-		} else if (!toDate.equals(other.toDate))
-			return false;
-		if (tutor == null) {
-			if (other.tutor != null)
-				return false;
-		} else if (!tutor.equals(other.tutor))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Stage [id=" + id + ", title=" + title + ", tutor=" + tutor + ", fromDate=" + fromDate + 
-				", toDate=" + toDate + "]";
-	}
-
-	public String toCSV() {
-		return id + ";" + title + ";" + tutor + ";" + CalendarUtil.toString(fromDate) + ";" + 
-				CalendarUtil.toString(toDate) + ";";
-	}
-
-	public String getKey() {
-		return String.valueOf(id);
-	}
-
-	
-	public String getKeyName() {
-		
-		return "id";
+		return "Stage [id=" + id + ", title=" + title + ", tutor=" + tutor + ", fromDate=" + fromDate + ", toDate="
+				+ toDate + ", candidate=" + candidate + "]";
 	}
 
 }
