@@ -11,46 +11,29 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="REFERENCE")
+@Table(name = "REFERENCES_")
 @XmlRootElement
-@NamedQueries({
-		@NamedQuery(name = "getAllReference", query = "select r from Reference r"),
+@NamedQueries({ @NamedQuery(name = "getAllReference", query = "select r from Reference r"),
 		@NamedQuery(name = "getReference", query = "select r from Reference r where r.eMail = :eMail"),
-		@NamedQuery(name = "getBySurnameReference", query = "select r from Reference r where r.surname = :surname"),
-		@NamedQuery(name = "getByReferenceCompanyReference", query = "select r from Reference r where r.referenceCompany = :referenceCompany"),
-		@NamedQuery(name = "deleteAllReference", query = "delete from Reference r"),
-		@NamedQuery(name = "deleteReference", query = "delete r from Reference r")
-		})
+		@NamedQuery(name = "getByCandidateReference", query = "select r from Reference r where r.candidate.eMail = :eMail"),
+		@NamedQuery(name = "deleteAllReference", query = "delete from Reference r") })
+public class Reference {
 
-public class Reference implements Channel {
-
+	private String eMail;
 	private String name;
 	private String surname;
 	private String referenceCompany;
 	private String phoneNumber;
-	private String opinion;
-	private String eMail;
-	
-	@OneToOne
-	@JoinColumn(name="CANDIDATE_ID")
+	private StringBuffer opinion;
 	private Candidate candidate;
-	
-		
-	public Reference(String eMail) {
-		this.eMail = eMail;
-	}
 
-	public Reference() {
-		super();
-	}
-	
 	@Id
-	@Column(name = "REFERENCE_ID", unique = true, nullable = false)
-	public String getEMail() {
+	@Column(name = "DEFERENCE_ID")
+	public String geteMail() {
 		return eMail;
 	}
 
-	public void setEMail(String eMail) {
+	public void seteMail(String eMail) {
 		this.eMail = eMail;
 	}
 
@@ -86,20 +69,29 @@ public class Reference implements Channel {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getOpinion() {
+	public StringBuffer getOpinion() {
 		return opinion;
 	}
 
-	public void setOpinion(String opinion) {
+	public void setOpinion(StringBuffer opinion) {
 		this.opinion = opinion;
 	}
-	
-	
+
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((candidate == null) ? 0 : candidate.hashCode());
 		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
 		return result;
 	}
@@ -113,6 +105,11 @@ public class Reference implements Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		Reference other = (Reference) obj;
+		if (candidate == null) {
+			if (other.candidate != null)
+				return false;
+		} else if (!candidate.equals(other.candidate))
+			return false;
 		if (eMail == null) {
 			if (other.eMail != null)
 				return false;
@@ -123,15 +120,9 @@ public class Reference implements Channel {
 
 	@Override
 	public String toString() {
-		return "Reference [name=" + name + ", surname=" + surname + ", referenceCompany=" + referenceCompany
-				+ ", phoneNumber=" + phoneNumber + ", opinion=" + opinion + ", eMail=" + eMail + ", candidate="
+		return "Reference [eMail=" + eMail + ", name=" + name + ", surname=" + surname + ", referenceCompany="
+				+ referenceCompany + ", phoneNumber=" + phoneNumber + ", opinion=" + opinion + ", candidate="
 				+ candidate + "]";
 	}
-	
-	
-
-
-
-	
 
 }
