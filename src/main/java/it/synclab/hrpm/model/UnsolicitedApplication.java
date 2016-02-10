@@ -13,28 +13,20 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="UNSOLICITED_APP")
+@Table(name="UNSOLICITED_APPS")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "getAllUnsolicitedApplication", query = "select u from UnsolicitedApplication u"),
 		@NamedQuery(name = "getUnsolicitedApplication", query = "select u from UnsolicitedApplication u where u.id = :id"),
-		@NamedQuery(name = "deleteAllUnsolicitedApplication", query = "delete from UnsolicitedApplication u"),
-		@NamedQuery(name = "deleteUnsolicitedApplication", query = "delete u from UnsolicitedApplication u") })
-public class UnsolicitedApplication implements Channel {
+		@NamedQuery(name = "deleteAllUnsolicitedApplication", query = "delete from UnsolicitedApplication u")})
+public class UnsolicitedApplication{
 
 	private long id;
-	
-	@OneToOne
-	@JoinColumn(name="CANDIDATE_ID")
-	  private Candidate candidate;
+	private Candidate candidate;
 				
 	public UnsolicitedApplication() {
 	}
 	
-	public UnsolicitedApplication(String id){
-		this.id = Integer.parseInt(id);
-	}
-		
 	@Id @GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(name = "UNSOLICITED_APP_ID", unique = true, nullable = false)
 	public long getId() {
@@ -45,7 +37,16 @@ public class UnsolicitedApplication implements Channel {
 		this.id = id;
 	}
 
-	
+	@OneToOne
+	@JoinColumn(name="CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
