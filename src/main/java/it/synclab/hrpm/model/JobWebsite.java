@@ -11,39 +11,43 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "JOB_WEBSITE")
+@Table(name = "JOB_WEBSITES")
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "getAllJobWebsite", query = "select j from JobWebsite j"),
-		@NamedQuery(name = "getJobWebsite", query = "select j from JobWebsite where j.url = :url "),
-		@NamedQuery(name = "getByCandidateJobWebsite", query = "select j from JobWebsite where j.candidate.eMail = :eMail"),
-		@NamedQuery(name = "getByNameJobWebsite", query = "select j from JobWebsite where j.url = :url order by j.name asc"),
-		@NamedQuery(name = "deleteJobWebsite", query = "select j from JobWebsite j where j.url = :url"),
+		@NamedQuery(name = "getJobWebsite", query = "select j from JobWebsite j where j.url = :url "),
+		@NamedQuery(name = "getByCandidateJobWebsite", query = "select j from JobWebsite j where j.candidate.eMail = :eMail"),
 		@NamedQuery(name = "deleteAllJobWebsite", query = "delete from JobWebsite j") })
-public class JobWebsite implements Channel {
+public class JobWebsite {
 
 	private String url;
 	private String name;
-	@OneToOne
-	@JoinColumn(name = "CANDIDATE_ID")
 	private Candidate candidate;
 
 	public JobWebsite(String url) {
 		this.url = url;
 	}
 
-	public JobWebsite() {
-		super();
-	}
-
 	@Id
-	@Column(name = "JOB_WEBSITE_ID", unique = true, nullable = false)
+	@Column(name = "JOB_WEBSITE_ID")
 	public String getUrl() {
 		return url;
 	}
-
+	
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+	
+	public void setCandidate(Candidate candidate) {
+		this.candidate=candidate;
+	}
+
+	
 
 	public String getName() {
 		return name;

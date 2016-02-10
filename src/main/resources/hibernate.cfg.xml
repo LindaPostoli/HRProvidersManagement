@@ -5,31 +5,35 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.search.default.directory_provider">
-			org.hibernate.search.store.FSDirectoryProvider
-		</property>
-
-		<property name="connection.datasource">java:comp/env/jdbc/HRPM</property>
-		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">synclab</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mydb</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- <property name="connection.datasource">java:comp/env/jdbc/HRPM</property>-->
 		<property name="archive.autodetection">class, hbm</property>
 
 		<!-- <property name="use_sql_comments">true</property> -->
 		<!-- <property name="format_sql">true</property> -->
 		<!-- <property name="show_sql">true</property> -->
+		
 		<property name="generate_statistics">true</property>
-		<property name="hbm2ddl.auto">create</property>
-		
+		<property name="hbm2ddl.auto">update</property>
+
 		<!-- Mapping files -->
-        <mapping class="it.synclab.hrpm.Candidate" />
-		<mapping class="it.synclab.hrpm.Channel" />
-		<mapping class="it.synclab.hrpm.JobWebsite" />
-		<mapping class="it.synclab.hrpm.Provider" />
-		<mapping class="it.synclab.hrpm.Rating" />
-		<mapping class="it.synclab.hrpm.Reference" />
-		<mapping class="it.synclab.hrpm.Stage" />
-		<mapping class="it.synclab.hrpm.University" />
-		<mapping class="it.synclab.hrpm.UnsolicitedApplication" />
+		<mapping class="it.synclab.hrpm.model.Candidate"/>
+		<mapping class="it.synclab.hrpm.model.Reference" />
+		<mapping class="it.synclab.hrpm.model.Rating" />
+		<mapping class="it.synclab.hrpm.model.JobWebsite" />
+		<mapping class="it.synclab.hrpm.model.Provider" />
+		<mapping class="it.synclab.hrpm.model.Stage" />
+		<mapping class="it.synclab.hrpm.model.University" />
+		<mapping class="it.synclab.hrpm.model.UnsolicitedApplication" />
 		
+		
+
 
 	</session-factory>
 </hibernate-configuration>

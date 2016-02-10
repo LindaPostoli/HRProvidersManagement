@@ -12,21 +12,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import it.synclab.hrpm.enumeration.ChannelType;
 import it.synclab.hrpm.util.CalendarUtil;
 import it.synclab.hrpm.regex.RegExpUtil;
 
 @Entity
 @Table(name = "CANDIDATES")
 @XmlRootElement
-@NamedQueries({
-		@NamedQuery(name = "getAllCandidate", query = "select c from Candidate c"),
+@NamedQueries({ 
+	    @NamedQuery(name = "getAllCandidate", query = "select c from Candidate c"),
 		@NamedQuery(name = "getCandidate", query = "select c from Candidate c where c.eMail = :eMail order by c.rating.general asc"),
-		@NamedQuery(name = "getByRatingCandidate", query = "select c.rating.general from Candidate c where c.rating.general > :general"),
+		@NamedQuery(name = "getByRatingCandidate", query = "select c from Candidate c where c.rating.general > :general"),
 		@NamedQuery(name = "getByCityCandidate", query = "select c from Candidate c order by c.city"),
-		@NamedQuery(name = "getAllRatingCandidate", query = "select c from Candidate c where c.rating is not null"),
-		@NamedQuery(name = "deleteCandidate", query = "delete c from Candidate c where c.eMail = :eMail"),
+		@NamedQuery(name = "getAllRatingsCandidate", query = "select c.rating from Candidate c where c.rating is not null"),
 		@NamedQuery(name = "deleteAllCandidate", query = "delete from Candidate c") })
 public class Candidate {
 
@@ -34,35 +31,27 @@ public class Candidate {
 	private String taxCode;
 	private String name;
 	private String surname;
-	private Calendar birthDate;//Annotation data
-	private String birthPlace;//Annotation data
+	private Calendar birthDate;// Annotation data
+	private String birthPlace;// Annotation data
 	private String address;
 	private String zipCode;
 	private String city;
 	private String country;
 	private String phoneNumber;
-
-	@OneToOne
 	private Rating rating;
 
-	@OneToOne(mappedBy = "candidate")
-	private Channel channel;
-
-	public Candidate() {
-
-	}
 
 	public Candidate(String eMail) {
 		this.eMail = eMail;
 	}
 
 	@Id
-	@Column(name = "CANDIDATE_ID", unique = true, nullable = false)
-	public String getEMail() {
+	@Column(name = "CANDIDATE_ID")
+	public String geteMail() {
 		return eMail;
 	}
 
-	public void setEMail(String eMail) {
+	public void seteMail(String eMail) {
 		if (RegExpUtil.checkEMmailFormat(eMail))
 			this.eMail = eMail;
 	}
@@ -167,6 +156,7 @@ public class Candidate {
 			this.phoneNumber = phoneNumber;
 	}
 
+	@OneToOne
 	public Rating getRating() {
 		return rating;
 	}
@@ -205,7 +195,7 @@ public class Candidate {
 		return "Candidate [eMail=" + eMail + ", taxCode=" + taxCode + ", name=" + name + ", surname=" + surname
 				+ ", birthDate=" + birthDate + ", birthPlace=" + birthPlace + ", address=" + address + ", zipCode="
 				+ zipCode + ", city=" + city + ", country=" + country + ", phoneNumber=" + phoneNumber + ", rating="
-				+ rating + ", channel=" + channel + "]";
+				+ rating + "]";
 	}
 
 }

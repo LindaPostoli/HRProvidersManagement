@@ -18,41 +18,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 import it.synclab.hrpm.util.CalendarUtil;
 
 @Entity
-@Table(name = "STAGE")
+@Table(name = "STAGES")
 @XmlRootElement
-@NamedQueries({
-	@NamedQuery(name = "getAllStage", query = "select s from Stage s"),
-	@NamedQuery(name = "getStage", query = "select s from Stage s where s.id = :id"),
-	@NamedQuery(name = "getByTitleStage", query = "select s from Stage s where s.title = :title"),
-	@NamedQuery(name = "getByTutorStage", query = "select s from Stage s where s.tutor = :tutor"),
-	@NamedQuery(name = "deleteAllStage", query = "delete from Stage s"),
-	@NamedQuery(name = "deleteStage", query = "delete s from Stage s")
-	})
-public class Stage implements Channel {
+@NamedQueries({ @NamedQuery(name = "getAllStage", query = "select s from Stage s"),
+		@NamedQuery(name = "getStage", query = "select s from Stage s where s.id = :id"),
+		@NamedQuery(name = "getByTutorStage", query = "select s from Stage s where s.tutor = :tutor"),
+		@NamedQuery(name = "deleteAllStage", query = "delete from Stage s")})
+public class Stage {
 
 	private long id;
 	private String title;
 	private String tutor;
 	private Calendar fromDate;
 	private Calendar toDate;
-
-	@OneToOne
-	@JoinColumn(name = "CANDIDATE_ID")
 	private Candidate candidate;
 
 	public Stage() {
-		super();
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "STAGER_ID", unique = true, nullable = false)
+	@GeneratedValue
+	@Column(name = "STAGER_ID")
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	public String getTitle() {

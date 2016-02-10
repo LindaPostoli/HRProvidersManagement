@@ -11,17 +11,16 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "PROVIDER")
+@Table(name = "PROVIDERS")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "getAllProvider", query = "select p from Provider p"),
 		@NamedQuery(name = "getProvider", query = "select p from Provider p where p.eMail = :eMail"),
-		@NamedQuery(name = "getByCandidateJobWebsite", query = "select p from Provider p where p.candidate.eMail = :eMail"),
+		@NamedQuery(name = "getByCandidateProvider", query = "select p from Provider p where p.candidate.eMail = :eMail"),
 		@NamedQuery(name = "getByCityProvider", query = "select p from Provider p where p.city = :city"),
 		@NamedQuery(name = "getByNameProvider", query = "select p from Provider p where p.name = :name"),
-		@NamedQuery(name = "deleteProvider", query = "select p from Provider p where p.eMail = :eMail"),
 		@NamedQuery(name = "deleteAllProvider", query = "delete from Provider p") })
-public class Provider implements Channel {
+public class Provider {
 
 	private String eMail;
 	private String name;
@@ -30,27 +29,30 @@ public class Provider implements Channel {
 	private String city;
 	private String country;
 	private String phoneNumber;
-
-	@OneToOne
-	@JoinColumn(name = "CANDIDATE_ID")
 	private Candidate candidate;
 
 	public Provider(String eMail) {
 		this.eMail = eMail;
 	}
-
-	public Provider() {
-		super();
-	}
 	
 	@Id
-	@Column(name = "PROVIDER_ID", unique = true, nullable = false)
-	public String getEMail() {
+	@Column(name = "PROVIDER_ID")
+	public String geteMail() {
 		return eMail;
 	}
 
-	public void setEMail(String eMail) {
+	public void seteMail(String eMail) {
 		this.eMail = eMail;
+	}
+	
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	public String getName() {

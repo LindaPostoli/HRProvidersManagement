@@ -5,46 +5,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-
 @Entity
 @Table(name = "RATINGS")
 @XmlRootElement
-@NamedQueries({
-		@NamedQuery(name = "getAllRating", query = "select r from Rating r"),
-		@NamedQuery(name = "getRating", query = "select r from Rating where r.candidate.eMail = :eMail"),
+@NamedQueries({ @NamedQuery(name = "getAllRating", query = "select r from Rating r"),
+		@NamedQuery(name = "getRating", query = "select r from Rating r where r.candidate.eMail = :eMail"),
 		@NamedQuery(name = "getByGeneralRating", query = "select r from Rating r where r.general > :general order by r.general"),
-		@NamedQuery(name = "deleteRating", query = "delete r from Rating r where r.candidate.eMail = :eMail"),
 		@NamedQuery(name = "deleteAllRating", query = "delete from Rating r") })
-public class Rating{
+public class Rating {
 
 	private long id;
 	private int professionality;
 	private int personality;
 	private int general;
 	private String note;
-	
-	@OneToOne 
 	private Candidate candidate;
 
 	public Rating() {
-		
 	}
 
-	@Id @GeneratedValue(strategy=GenerationType.TABLE)
-	@Column(name = "RATING_ID", unique = true, nullable = false)
+	@Id
+	@GeneratedValue
+	@Column(name = "RATING_ID")
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	public int getProfessionality() {
@@ -106,9 +111,5 @@ public class Rating{
 		return "Rating [id=" + id + ", professionality=" + professionality + ", personality=" + personality
 				+ ", general=" + general + ", note=" + note + "]";
 	}
-	
-	
 
-	
-	
 }

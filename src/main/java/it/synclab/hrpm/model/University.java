@@ -11,17 +11,14 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "UNIVERSITY")
+@Table(name = "UNIVERSITIES")
 @XmlRootElement
-@NamedQueries({
-	@NamedQuery(name = "getAllUniversity", query = "select u from University u"),
-	@NamedQuery(name = "getUniversity", query = "select u from University u where u.eMail = :eMail"),
-	@NamedQuery(name = "getByNameUniversity", query = "select u from University u where u.name = :name"),
-	@NamedQuery(name = "getByCityUniversity", query = "select u from University u where u.city = :city"),
-	@NamedQuery(name = "getByFieldOfStudyUniversity", query = "select u from University u where u.fieldOfStudy = :fieldOfStudy"),
-	@NamedQuery(name = "deleteAllUniversity", query = "delete from University u"),
-	@NamedQuery(name = "deleteUniversity", query = "delete u from University u") })
-public class University implements Channel {
+@NamedQueries({ @NamedQuery(name = "getAllUniversity", query = "select u from University u"),
+		@NamedQuery(name = "getUniversity", query = "select u from University u where u.eMail = :eMail"),
+		@NamedQuery(name = "getByNameUniversity", query = "select u from University u where u.name = :name"),
+		@NamedQuery(name = "getByCityUniversity", query = "select u from University u where u.city = :city"),
+		@NamedQuery(name = "deleteAllUniversity", query = "delete from University u")})
+public class University {
 
 	private String name;
 	private String address;
@@ -31,9 +28,6 @@ public class University implements Channel {
 	private String phoneNumber;
 	private String eMail;
 	private String fieldOfStudy;
-
-	@OneToOne
-	@JoinColumn(name = "CANDIDATE_ID")
 	private Candidate candidate;
 
 	public University(String name) {
@@ -52,6 +46,16 @@ public class University implements Channel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "CANDIDATE_ID")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 
 	public String getAddress() {

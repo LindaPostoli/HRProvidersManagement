@@ -16,6 +16,14 @@ public class PersistentService<T> {
 		session = ConnectionPool.getInstance().getConnection();
 	}
 	
+	public void beginTransaction(){
+		this.session.beginTransaction();
+	}
+	
+	public void commitTransaction(){
+		this.session.getTransaction().commit();
+	}
+	
 	public void setSession(Session session) {
 		this.session = session;
 	}
